@@ -1,0 +1,12 @@
+.\objects\main.o: ..\User\main.c
+.\objects\main.o: D:\keil5\ARM\PACK\ARM\CMSIS\5.0.1\Device\ARM\ARMCM4\Include\ARMCM4.h
+.\objects\main.o: D:\keil5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include\core_cm4.h
+.\objects\main.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\main.o: D:\keil5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include\cmsis_compiler.h
+.\objects\main.o: D:\keil5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include\cmsis_armcc.h
+.\objects\main.o: D:\keil5\ARM\PACK\ARM\CMSIS\5.0.1\Device\ARM\ARMCM4\Include\system_ARMCM4.h
+.\objects\main.o: ..\gsthread\include\gsthread.h
+.\objects\main.o: ..\gsthread\include\gsdef.h
+.\objects\main.o: ..\User\gsconfig.h
+.\objects\main.o: ..\gsthread\include\gsservice.h
+.\objects\main.o: ..\gsthread\include\list.h

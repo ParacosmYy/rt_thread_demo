@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "gsthread.h": "c",
+        "gsdef.h": "c"
+    }
+}

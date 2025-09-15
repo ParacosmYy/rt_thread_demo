@@ -1,0 +1,342 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         ;*******************************************************
+                       ******************
+    2 00000000         ;                                 È«¾Ö±äÁ¿
+    3 00000000         ;*******************************************************
+                       ******************
+    4 00000000         
+    5 00000000                 IMPORT           gs_thread_switch_interrupt_flag
+    6 00000000                 IMPORT           gs_interrupt_from_thread
+    7 00000000                 IMPORT           gs_interrupt_to_thread
+    8 00000000         
+    9 00000000         ;*******************************************************
+                       ******************
+   10 00000000         ;                                 ³£Á¿
+   11 00000000         ;*******************************************************
+                       ******************
+   12 00000000         ;-------------------------------------------------------
+                       ------------------
+   13 00000000         ;ÓÐ¹ØÄÚºËÍâÉè¼Ä´æÆ÷¶¨Òå¿É²Î¿¼¹Ù·½ÎÄµµ£ºSTM32F10xxx Corte
+                       x-M3 programming manual
+   14 00000000         ;ÏµÍ³¿ØÖÆ¿éÍâÉèSCBµØÖ··¶Î§£º0xE000ED00-0xE000ED3F
+   15 00000000         ;-------------------------------------------------------
+                       ------------------
+   16 00000000 E000ED08 
+                       SCB_VTOR
+                               EQU              0xE000ED08  ; ÏòÁ¿±íÆ«ÒÆ¼Ä´æÆ÷
+   17 00000000 E000ED04 
+                       NVIC_INT_CTRL
+                               EQU              0xE000ED04  ; ÖÐ¶Ï¿ØÖÆ×´Ì¬¼Ä´æÆ
+                                                            ÷
+   18 00000000 E000ED20 
+                       NVIC_SYSPRI2
+                               EQU              0xE000ED20  ; ÏµÍ³ÓÅÏÈ¼¶¼Ä´æÆ÷(
+                                                            2)
+   19 00000000 00FF0000 
+                       NVIC_PENDSV_PRI
+                               EQU              0x00FF0000  ; PendSV ÓÅÏÈ¼¶Öµ (
+                                                            lowest)
+   20 00000000 10000000 
+                       NVIC_PENDSVSET
+                               EQU              0x10000000  ; ´¥·¢PendSV except
+                                                            ionµÄÖµ
+   21 00000000         
+   22 00000000         ;*******************************************************
+                       ******************
+   23 00000000         ;                              ´úÂë²úÉúÖ¸Áî
+   24 00000000         ;*******************************************************
+                       ******************
+   25 00000000         
+   26 00000000                 AREA             |.text|, CODE, READONLY, ALIGN=
+2
+   27 00000000                 THUMB
+   28 00000000                 REQUIRE8
+   29 00000000                 PRESERVE8
+   30 00000000         
+   31 00000000         gs_hw_context_switch_first
+                               PROC
+   32 00000000                 EXPORT           gs_hw_context_switch_first
+   33 00000000         
+   34 00000000 4922            LDR              r1 , =gs_interrupt_to_thread
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+   35 00000002 6008            STR              r0,  [r1]
+   36 00000004         
+   37 00000004 4922            LDR              r1 , =gs_interrupt_from_thread
+   38 00000006 F04F 0000       MOV              r0 ,#0x0
+   39 0000000A 6008            STR              r0 , [r1]
+   40 0000000C         
+   41 0000000C 4921            LDR              r1 , =gs_thread_switch_interrup
+t_flag
+   42 0000000E F04F 0001       MOV              r0 , #1
+   43 00000012 6008            STR              r0 , [r1]
+   44 00000014         
+   45 00000014 4820            LDR              r0, =NVIC_SYSPRI2
+   46 00000016 F44F 017F       LDR              r1, =NVIC_PENDSV_PRI
+   47 0000001A F8D0 2000       LDR.W            r2, [r0,#0x00] ; ¶Á
+   48 0000001E EA41 0102       ORR              r1,r1,r2    ; ¸Ä
+   49 00000022 6001            STR              r1, [r0]    ; Ð´
+   50 00000024         
+   51 00000024 481D            LDR              r0, =NVIC_INT_CTRL
+   52 00000026 F04F 5180       LDR              r1, =NVIC_PENDSVSET
+   53 0000002A 6001            STR              r1, [r0]
+   54 0000002C         
+   55 0000002C B661            CPSIE            F
+   56 0000002E B662            CPSIE            I
+   57 00000030         
+   58 00000030                 ENDP
+   59 00000030         
+   60 00000030         gs_hw_context_switch
+                               PROC
+   61 00000030                 EXPORT           gs_hw_context_switch
+   62 00000030         
+   63 00000030 4A18            LDR              r2, =gs_thread_switch_interrupt
+_flag
+   64 00000032 6813            LDR              r3,[r2]
+   65 00000034 2B01            CMP              r3,#1
+   66 00000036 D004            BEQ              _reswitch
+   67 00000038 F04F 0301       MOV              r3,#1
+   68 0000003C 6013            STR              r3,[r2]
+   69 0000003E         
+   70 0000003E 4A14            LDR              r2, =gs_interrupt_from_thread
+   71 00000040 6010            STR              r0, [r2]
+   72 00000042         
+   73 00000042         _reswitch
+   74 00000042         
+   75 00000042 4A12            LDR              r2, =gs_interrupt_to_thread
+   76 00000044 6011            STR              r1, [r2]
+   77 00000046         
+   78 00000046         ; ´¥·¢PendSVÒì³££¬ÊµÏÖÉÏÏÂÎÄÇÐ»»
+   79 00000046 4815            LDR              r0, =NVIC_INT_CTRL
+   80 00000048 F04F 5180       LDR              r1, =NVIC_PENDSVSET
+   81 0000004C 6001            STR              r1, [r0]
+   82 0000004E         
+   83 0000004E         ; ×Ó³ÌÐò·µ»Ø
+   84 0000004E 4770            BX               LR
+   85 00000050         
+   86 00000050         ; ×Ó³ÌÐò½áÊø
+   87 00000050                 ENDP
+   88 00000050         
+   89 00000050         PendSV_Handler
+                               PROC
+
+
+
+ARM Macro Assembler    Page 3 
+
+
+   90 00000050                 EXPORT           PendSV_Handler
+   91 00000050         
+   92 00000050 F3EF 8210       MRS              r2, PRIMASK
+   93 00000054 B672            CPSID            I
+   94 00000056         
+   95 00000056 480F            LDR              r0, =gs_thread_switch_interrupt
+_flag
+   96 00000058 6801            LDR              r1, [r0]
+   97 0000005A B191            CBZ              r1, pendsv_exit
+   98 0000005C         
+   99 0000005C F04F 0100       MOV              r1, #0x00
+  100 00000060 6001            STR              r1, [r0]
+  101 00000062         
+  102 00000062 480B            LDR              r0, =gs_interrupt_from_thread
+  103 00000064 6801            LDR              r1, [r0]
+  104 00000066 B129            CBZ              r1, switch_to_thread
+  105 00000068         
+  106 00000068 F3EF 8109       MRS              r1, psp
+  107 0000006C E921 0FF0       STMFD            r1!, {r4 - r11}
+  108 00000070 6800            LDR              r0, [r0]
+  109 00000072 6001            STR              r1, [r0]
+  110 00000074         
+  111 00000074         switch_to_thread
+  112 00000074 4905            LDR              r1, =gs_interrupt_to_thread
+  113 00000076         
+  114 00000076 6809            LDR              r1, [r1]
+  115 00000078 6809            LDR              r1, [r1]
+  116 0000007A         
+  117 0000007A E8B1 0FF0       LDMFD            r1!, {r4 - r11}
+  118 0000007E F381 8809       MSR              psp, r1
+  119 00000082         
+  120 00000082         pendsv_exit
+  121 00000082         ; »Ö¸´ÖÐ¶Ï
+  122 00000082 F382 8810       MSR              PRIMASK, r2
+  123 00000086         
+  124 00000086 F04E 0E04       ORR              lr, lr, #0x04
+  125 0000008A 4770            BX               lr
+  126 0000008C         
+  127 0000008C         ; PendSV_Handler ×Ó³ÌÐò½áÊø
+  128 0000008C                 ENDP
+  129 0000008C         
+  130 0000008C         
+  131 0000008C                 ALIGN            4
+  132 0000008C         
+  133 0000008C                 END
+              00000000 
+              00000000 
+              00000000 
+              E000ED20 
+              E000ED04 
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4 --apcs=interw
+ork --depend=.\objects\context_rvds.d -o.\objects\context_rvds.o -I.\RTE\_Targe
+t_1 -ID:\keil5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include -ID:\keil5\ARM\PACK\ARM\C
+MSIS\5.0.1\Device\ARM\ARMCM4\Include --predefine="__UVISION_VERSION SETA 524" -
+-predefine="_RTE_ SETA 1" --predefine="ARMCM4 SETA 1" --list=.\listings\context
+_rvds.lst ..\gsthread\libcpu\arm\cortex-m4\context_rvds.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+.text 00000000
+
+Symbol: .text
+   Definitions
+      At line 26 in file ..\gsthread\libcpu\arm\cortex-m4\context_rvds.s
+   Uses
+      None
+Comment: .text unused
+PendSV_Handler 00000050
+
+Symbol: PendSV_Handler
+   Definitions
+      At line 89 in file ..\gsthread\libcpu\arm\cortex-m4\context_rvds.s
+   Uses
+      At line 90 in file ..\gsthread\libcpu\arm\cortex-m4\context_rvds.s
+Comment: PendSV_Handler used once
+_reswitch 00000042
+
+Symbol: _reswitch
+   Definitions
+      At line 73 in file ..\gsthread\libcpu\arm\cortex-m4\context_rvds.s
+   Uses
+      At line 66 in file ..\gsthread\libcpu\arm\cortex-m4\context_rvds.s
+Comment: _reswitch used once
+gs_hw_context_switch 00000030
+
+Symbol: gs_hw_context_switch
+   Definitions
+      At line 60 in file ..\gsthread\libcpu\arm\cortex-m4\context_rvds.s
+   Uses
+      At line 61 in file ..\gsthread\libcpu\arm\cortex-m4\context_rvds.s
+Comment: gs_hw_context_switch used once
+gs_hw_context_switch_first 00000000
+
+Symbol: gs_hw_context_switch_first
+   Definitions
+      At line 31 in file ..\gsthread\libcpu\arm\cortex-m4\context_rvds.s
+   Uses
+      At line 32 in file ..\gsthread\libcpu\arm\cortex-m4\context_rvds.s
+Comment: gs_hw_context_switch_first used once
+pendsv_exit 00000082
+
+Symbol: pendsv_exit
+   Definitions
+      At line 120 in file ..\gsthread\libcpu\arm\cortex-m4\context_rvds.s
+   Uses
+      At line 97 in file ..\gsthread\libcpu\arm\cortex-m4\context_rvds.s
+Comment: pendsv_exit used once
+switch_to_thread 00000074
+
+Symbol: switch_to_thread
+   Definitions
+      At line 111 in file ..\gsthread\libcpu\arm\cortex-m4\context_rvds.s
+   Uses
+      At line 104 in file ..\gsthread\libcpu\arm\cortex-m4\context_rvds.s
+Comment: switch_to_thread used once
+7 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Absolute symbols
+
+NVIC_INT_CTRL E000ED04
+
+Symbol: NVIC_INT_CTRL
+   Definitions
+      At line 17 in file ..\gsthread\libcpu\arm\cortex-m4\context_rvds.s
+   Uses
+      At line 51 in file ..\gsthread\libcpu\arm\cortex-m4\context_rvds.s
+      At line 79 in file ..\gsthread\libcpu\arm\cortex-m4\context_rvds.s
+
+NVIC_PENDSVSET 10000000
+
+Symbol: NVIC_PENDSVSET
+   Definitions
+      At line 20 in file ..\gsthread\libcpu\arm\cortex-m4\context_rvds.s
+   Uses
+      At line 52 in file ..\gsthread\libcpu\arm\cortex-m4\context_rvds.s
+      At line 80 in file ..\gsthread\libcpu\arm\cortex-m4\context_rvds.s
+
+NVIC_PENDSV_PRI 00FF0000
+
+Symbol: NVIC_PENDSV_PRI
+   Definitions
+      At line 19 in file ..\gsthread\libcpu\arm\cortex-m4\context_rvds.s
+   Uses
+      At line 46 in file ..\gsthread\libcpu\arm\cortex-m4\context_rvds.s
+Comment: NVIC_PENDSV_PRI used once
+NVIC_SYSPRI2 E000ED20
+
+Symbol: NVIC_SYSPRI2
+   Definitions
+      At line 18 in file ..\gsthread\libcpu\arm\cortex-m4\context_rvds.s
+   Uses
+      At line 45 in file ..\gsthread\libcpu\arm\cortex-m4\context_rvds.s
+Comment: NVIC_SYSPRI2 used once
+SCB_VTOR E000ED08
+
+Symbol: SCB_VTOR
+   Definitions
+      At line 16 in file ..\gsthread\libcpu\arm\cortex-m4\context_rvds.s
+   Uses
+      None
+Comment: SCB_VTOR unused
+5 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+External symbols
+
+gs_interrupt_from_thread 00000000
+
+Symbol: gs_interrupt_from_thread
+   Definitions
+      At line 6 in file ..\gsthread\libcpu\arm\cortex-m4\context_rvds.s
+   Uses
+      At line 37 in file ..\gsthread\libcpu\arm\cortex-m4\context_rvds.s
+      At line 70 in file ..\gsthread\libcpu\arm\cortex-m4\context_rvds.s
+      At line 102 in file ..\gsthread\libcpu\arm\cortex-m4\context_rvds.s
+
+gs_interrupt_to_thread 00000000
+
+Symbol: gs_interrupt_to_thread
+   Definitions
+      At line 7 in file ..\gsthread\libcpu\arm\cortex-m4\context_rvds.s
+   Uses
+      At line 34 in file ..\gsthread\libcpu\arm\cortex-m4\context_rvds.s
+      At line 75 in file ..\gsthread\libcpu\arm\cortex-m4\context_rvds.s
+      At line 112 in file ..\gsthread\libcpu\arm\cortex-m4\context_rvds.s
+
+gs_thread_switch_interrupt_flag 00000000
+
+Symbol: gs_thread_switch_interrupt_flag
+   Definitions
+      At line 5 in file ..\gsthread\libcpu\arm\cortex-m4\context_rvds.s
+   Uses
+      At line 41 in file ..\gsthread\libcpu\arm\cortex-m4\context_rvds.s
+      At line 63 in file ..\gsthread\libcpu\arm\cortex-m4\context_rvds.s
+      At line 95 in file ..\gsthread\libcpu\arm\cortex-m4\context_rvds.s
+
+3 symbols
+350 symbols in table
