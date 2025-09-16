@@ -30,7 +30,8 @@ int main(void)
 	
 	
 
-	gs_thread_init( &gs_thread_flag1,                 
+	gs_thread_init( &gs_thread_flag1,   
+                    "thread1",
 	                flag1_thread_entry,               
 	                GS_NULL,                          
 	                &gs_flag1_thread_stack[0],        
@@ -39,7 +40,8 @@ int main(void)
 	gs_list_insert_before( &(gs_thread_priority_table[0]),&(gs_thread_flag1.tlist) );
 	
 
-	gs_thread_init( &gs_thread_flag2,               
+	gs_thread_init( &gs_thread_flag2, 
+                    "thread2vs",
 	                flag2_thread_entry,             
 	                GS_NULL,                        
 	                &gs_flag2_thread_stack[0],      

@@ -1,6 +1,7 @@
 #ifndef __GS_DEF_H__
 #define __GS_DEF_H__
 
+#include <gsconfig.h>
 /*
 *************************************************************************
 *                               数据类型
@@ -78,9 +79,24 @@ struct gs_list_node
 };
 typedef struct gs_list_node gs_list_t ;			
 
+struct gs_object
+{
+    char name [GS_NAME_MAX] ;
+    gs_uint8_t type ;
+    gs_uint8_t flags; 
+    gs_list_t list;
+};
+typedef struct gs_object *gs_object_t ;
+
 
 struct gs_thread
 {
+    char name [GS_NAME_MAX] ;
+    gs_uint8_t type;
+    gs_uint8_t flags;
+    gs_list_t list;
+    
+    
 	void        *sp;	          /* 线程栈指针 */
 	void        *entry;	          /* 线程入口地址 */
 	void        *parameter;	      /* 线程形参 */	
@@ -91,4 +107,48 @@ struct gs_thread
 };
 typedef struct gs_thread *gs_thread_t;
 
+/**
+ * 对象类型由下面的宏来使能，这些宏通常在gsconfig.h中定义
+ *  - Thread
+ *  - Semaphore
+ *  - Mutex
+ *  - Event
+ *  - MailBox
+ *  - MessageQueue
+ *  - MemHeap
+ *  - MemPool
+ *  - Device
+ *  - Timer
+ *  - Module
+ *  - Unknown
+ *  - Static
+ */
+enum gs_object_class_type
+{
+     GS_Object_Class_Thread = 0,       /* 对象是线程 */
+     GS_Object_Class_Semaphore,        /* 对象是信号量 */
+     GS_Object_Class_Mutex,            /* 对象是互斥量 */
+     GS_Object_Class_Event,            /* 对象是事件 */
+     GS_Object_Class_MailBox,          /* 对象是邮箱 */
+     GS_Object_Class_MessageQueue,     /* 对象是消息队列 */
+     GS_Object_Class_MemHeap,          /* 对象是内存堆 */
+     GS_Object_Class_MemPool,          /* 对象是内存池 */
+     GS_Object_Class_Device,           /* 对象是设备 */
+     GS_Object_Class_Timer,            /* 对象是定时器 */
+     GS_Object_Class_Module,           /* 对象是模块 */
+     GS_Object_Class_Unknown,          /* 对象未知 */
+     GS_Object_Class_Static = 0x80     /* 对象是静态对象 */
+};
+
+
+
+/**
+ * 内核对象信息结构体
+ */
+struct gs_object_information
+{
+    enum gs_object_class_type type;                     /* 对象类型 */
+    gs_list_t                 object_list;              /* 对象列表节点 */
+    gs_size_t                 object_size;              /* 对象大小 */
+};
 #endif  /* __GS_DEF_H__ */

@@ -28,6 +28,21 @@ NVIC_PENDSVSET  EQU     0x10000000     ; ´¥·¢PendSV exceptionµÄÖµ
     REQUIRE8
     PRESERVE8
 		
+gs_hw_interrupt_disable PROC
+    EXPORT gs_hw_interrupt_disable
+        
+    MRS r0, PRIMASK
+    CPSID I
+    BX lr
+    ENDP
+        
+gs_hw_interrupt_enable PROC
+    EXPORT gs_hw_interrupt_enable
+        
+    MSR PRIMASK , r0
+    BX lr
+    ENDP        
+        
 gs_hw_context_switch_first PROC
     EXPORT gs_hw_context_switch_first
 

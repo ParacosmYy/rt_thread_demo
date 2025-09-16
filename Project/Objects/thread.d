@@ -5,3 +5,4 @@
 .\objects\thread.o: ..\gsthread\include\gsservice.h
 .\objects\thread.o: ..\gsthread\include\list.h
 .\objects\thread.o: ..\gsthread\include\gshw.h
+.\objects\thread.o: ..\gsthread\include\object.h

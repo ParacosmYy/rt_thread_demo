@@ -425,6 +425,16 @@
               <FileType>1</FileType>
               <FilePath>..\gsthread\src\list.c</FilePath>
             </File>
+            <File>
+              <FileName>object.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\gsthread\src\object.c</FilePath>
+            </File>
+            <File>
+              <FileName>kservice.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\gsthread\src\kservice.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -451,6 +461,11 @@
               <FilePath>..\gsthread\include\gshw.h</FilePath>
             </File>
             <File>
+              <FileName>list.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\gsthread\include\list.h</FilePath>
+            </File>
+            <File>
               <FileName>gsservice.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\gsthread\include\gsservice.h</FilePath>
@@ -461,9 +476,9 @@
               <FilePath>..\gsthread\include\gsthread.h</FilePath>
             </File>
             <File>
-              <FileName>list.h</FileName>
+              <FileName>object.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\gsthread\include\list.h</FilePath>
+              <FilePath>..\gsthread\include\object.h</FilePath>
             </File>
           </Files>
         </Group>

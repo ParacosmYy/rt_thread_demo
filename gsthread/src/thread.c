@@ -1,9 +1,10 @@
 #include <gsthread.h>
 #include <gshw.h>
+#include <object.h>
 
-
-gs_err_t gs_thread_init(struct gs_thread *thread,void(*entry)(void *parameter),void* parameter , void* stack_addr,gs_uint32_t stack_size)
+gs_err_t gs_thread_init(struct gs_thread *thread,char *name , void(*entry)(void *parameter),void* parameter , void* stack_addr,gs_uint32_t stack_size)
 {
+    gs_object_init((gs_object_t)thread,GS_Object_Class_Thread,name);
     gs_list_init(&thread->tlist);
     
     thread->entry = (void*)entry;

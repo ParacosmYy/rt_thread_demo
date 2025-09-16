@@ -5,6 +5,8 @@
 ".\objects\scheduler.o"
 ".\objects\thread.o"
 ".\objects\list.o"
+".\objects\object.o"
+".\objects\kservice.o"
 ".\objects\startup_armcm4.o"
 ".\objects\system_armcm4.o"
 --strict --scatter ".\Objects\YH-RT-Thread.sct"
