@@ -54,6 +54,8 @@ gs_uint8_t * gs_hw_stack_init(void *tentry, void *parameter , gs_uint8_t* stack_
     stk = (gs_uint8_t *)GS_ALIGN_DOWN((gs_uint32_t)stk,8);
     stk = stk - sizeof(struct stack_frame);
     
+    stack_frame = (struct stack_frame *)stk;
+    
     for (int i = 0; i < sizeof(struct stack_frame) / sizeof(gs_uint32_t); i ++)
     {
         ((gs_uint32_t *)stack_frame)[i] = 0xdeadbeef;

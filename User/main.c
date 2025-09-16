@@ -65,7 +65,7 @@ void flag1_thread_entry( void *p_arg )
 		delay( 100 );		
 		flag1 = 0;
 		delay( 100 );
-
+        gs_schedule();
 	}
 }
 
@@ -78,7 +78,7 @@ void flag2_thread_entry( void *p_arg )
 		delay( 100 );		
 		flag2 = 0;
 		delay( 100 );
-		
+		gs_schedule();
 
 	}
 }
