@@ -104,6 +104,8 @@ struct gs_thread
 	gs_uint32_t stack_size;       /* 线程栈大小，单位为字节 */
 	
 	gs_list_t   tlist;            /* 线程链表节点 */
+    
+    gs_ubase_t remaining_tick ;
 };
 typedef struct gs_thread *gs_thread_t;
 

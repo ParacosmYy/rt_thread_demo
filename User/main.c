@@ -26,7 +26,16 @@ void flag2_thread_entry(void *p_arg);
 
 int main(void)
 {	
+     /* 关中断 */
+    gs_hw_interrupt_disable();
+    
+    /* SysTick中断频率设置 */
+    SysTick_Config( SystemCoreClock / GS_TICK_PER_SECOND );
+	
+    
 	gs_system_scheduler_init();
+    
+    gs_thread_idle_init();	
 	
 	
 
@@ -64,10 +73,10 @@ void flag1_thread_entry( void *p_arg )
 	for( ;; )
 	{
 		flag1 = 1;
-		delay( 100 );		
+		gs_thread_delay(2);
 		flag1 = 0;
-		delay( 100 );
-        gs_schedule();
+		gs_thread_delay(2);
+       // gs_schedule();
 	}
 }
 
@@ -77,10 +86,24 @@ void flag2_thread_entry( void *p_arg )
 	for( ;; )
 	{
 		flag2 = 1;
-		delay( 100 );		
+		gs_thread_delay(2);
 		flag2 = 0;
-		delay( 100 );
-		gs_schedule();
+		gs_thread_delay(2);
+		//gs_schedule();
 
 	}
 }
+
+
+void SysTick_Handler(void)
+{
+    /* 进入中断 */
+    gs_interrupt_enter();
+
+    gs_tick_increase();
+
+    /* 离开中断 */
+    gs_interrupt_leave();
+}
+
+

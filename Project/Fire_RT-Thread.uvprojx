@@ -435,6 +435,21 @@
               <FileType>1</FileType>
               <FilePath>..\gsthread\src\kservice.c</FilePath>
             </File>
+            <File>
+              <FileName>idle.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\gsthread\src\idle.c</FilePath>
+            </File>
+            <File>
+              <FileName>irq.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\gsthread\src\irq.c</FilePath>
+            </File>
+            <File>
+              <FileName>clock.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\gsthread\src\clock.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
