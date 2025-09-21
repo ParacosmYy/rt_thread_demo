@@ -25,8 +25,11 @@ void gs_thread_idle_entry(void *parameter)
 
 void gs_thread_idle_init()
 {
-    gs_thread_init(&idle, "idle", gs_thread_idle_entry,GS_NULL,&gs_thread_stack[0],sizeof(gs_thread_stack));
+    gs_thread_init(&idle, "idle", gs_thread_idle_entry,GS_NULL,&gs_thread_stack[0],sizeof(gs_thread_stack) , GS_THREAD_PRIORITY_MAX - 1 );
     
-    gs_list_insert_before(&gs_thread_priority_table[GS_THREAD_PRIORITY_MAX-1],&(idle.tlist));
+   // gs_list_insert_before(&gs_thread_priority_table[GS_THREAD_PRIORITY_MAX-1],&(idle.tlist));
+    
+    gs_thread_startup(&idle);
+    
 }
 

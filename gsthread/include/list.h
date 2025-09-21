@@ -34,4 +34,9 @@ gs_inline void gs_list_remove(gs_list_t* new_node)
     new_node->prev=new_node->next=new_node;
 }
 
+gs_inline int gs_list_isempty(const gs_list_t *l)
+{
+    return l->next == l;
+}
+
 #endif

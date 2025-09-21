@@ -106,6 +106,13 @@ struct gs_thread
 	gs_list_t   tlist;            /* 线程链表节点 */
     
     gs_ubase_t remaining_tick ;
+    
+    gs_uint8_t  current_priority;     /* 当前优先级 */
+    gs_uint8_t  init_priority;        /* 初始优先级 */
+    gs_uint32_t number_mask;          /* 当前优先级掩码 */
+    
+    gs_err_t    error;                /* 错误码 */
+    gs_uint8_t  stat;                 /* 线程的状态 */
 };
 typedef struct gs_thread *gs_thread_t;
 
@@ -153,4 +160,21 @@ struct gs_object_information
     gs_list_t                 object_list;              /* 对象列表节点 */
     gs_size_t                 object_size;              /* 对象大小 */
 };
+
+/*
+ * 线程状态定义
+ */
+#define GS_THREAD_INIT                  0x00                /* 初始态 */
+#define GS_THREAD_READY                 0x01                /* 就绪态 */
+#define GS_THREAD_SUSPEND               0x02                /* 挂起态 */
+#define GS_THREAD_RUNNING               0x03                /* 运行态 */
+#define GS_THREAD_BLOCK                 GS_THREAD_SUSPEND   /* 阻塞态 */
+#define GS_THREAD_CLOSE                 0x04                /* 关闭态 */
+#define GS_THREAD_STAT_MASK             0x0f
+        
+#define GS_THREAD_STAT_SIGNAL           0x10
+#define GS_THREAD_STAT_SIGNAL_READY     (GS_THREAD_STAT_SIGNAL | GS_THREAD_READY)
+#define GS_THREAD_STAT_SIGNAL_SUSPEND   0x20
+#define GS_THREAD_STAT_SIGNAL_MASK      0xf0
+
 #endif  /* __GS_DEF_H__ */

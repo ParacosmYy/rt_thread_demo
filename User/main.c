@@ -40,24 +40,26 @@ int main(void)
 	
 
 	gs_thread_init( &gs_thread_flag1,   
-                    "thread1",
+                    "thread1vs",
 	                flag1_thread_entry,               
 	                GS_NULL,                          
 	                &gs_flag1_thread_stack[0],        
-	                sizeof(gs_flag1_thread_stack) );  
+	                sizeof(gs_flag1_thread_stack),
+                    2    );  
 	
-	gs_list_insert_before( &(gs_thread_priority_table[0]),&(gs_thread_flag1.tlist) );
-	
+	//gs_list_insert_before( &(gs_thread_priority_table[0]),&(gs_thread_flag1.tlist) );
+	gs_thread_startup(&gs_thread_flag1);
 
 	gs_thread_init( &gs_thread_flag2, 
                     "thread2vs",
 	                flag2_thread_entry,             
 	                GS_NULL,                        
 	                &gs_flag2_thread_stack[0],      
-	                sizeof(gs_flag2_thread_stack) );
+	                sizeof(gs_flag2_thread_stack) ,
+                    3    );
 
-	gs_list_insert_before( &(gs_thread_priority_table[1]),&(gs_thread_flag2.tlist) );
-	
+//  gs_list_insert_before( &(gs_thread_priority_table[1]),&(gs_thread_flag2.tlist) );
+	gs_thread_startup(&gs_thread_flag2);
 
 	gs_system_scheduler_start(); 
 }

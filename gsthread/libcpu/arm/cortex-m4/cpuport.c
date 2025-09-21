@@ -10,11 +10,7 @@ gs_uint32_t gs_interrupt_to_thread;
 gs_uint32_t gs_thread_switch_interrupt_flag;
 
 
-/*
-*************************************************************************
-*                                 数据类型
-*************************************************************************
-*/
+
 struct exception_stack_frame
 {
     /* 异常发生时自动保存的寄存器 */
@@ -60,7 +56,7 @@ gs_uint8_t * gs_hw_stack_init(void *tentry, void *parameter , gs_uint8_t* stack_
     {
         ((gs_uint32_t *)stack_frame)[i] = 0xdeadbeef;
     }
-    /* 初始化异常发生时自动保存的寄存器 */
+    
 	stack_frame->exception_stack_frame.r0  = (unsigned long)parameter; /* r0 : argument */
 	stack_frame->exception_stack_frame.r1  = 0;                        /* r1 */
 	stack_frame->exception_stack_frame.r2  = 0;                        /* r2 */
@@ -70,6 +66,6 @@ gs_uint8_t * gs_hw_stack_init(void *tentry, void *parameter , gs_uint8_t* stack_
 	stack_frame->exception_stack_frame.pc  = (unsigned long)tentry;    /* entry point, pc */
 	stack_frame->exception_stack_frame.psr = 0x01000000L;              /* PSR */
 	
-	/* 返回线程栈指针 */
+	
 	return stk;
 }

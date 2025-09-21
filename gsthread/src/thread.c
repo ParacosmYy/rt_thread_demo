@@ -3,8 +3,8 @@
 #include <object.h>
 
 extern struct gs_thread *gs_current_thread;
-
-gs_err_t gs_thread_init(struct gs_thread *thread,char *name , void(*entry)(void *parameter),void* parameter , void* stack_addr,gs_uint32_t stack_size)
+extern gs_uint32_t gs_thread_ready_priority_group ;
+gs_err_t gs_thread_init(struct gs_thread *thread,char *name , void(*entry)(void *parameter),void* parameter , void* stack_addr,gs_uint32_t stack_size,gs_uint8_t priority)
 {
     gs_object_init((gs_object_t)thread,GS_Object_Class_Thread,name);
     gs_list_init(&thread->tlist);
@@ -19,17 +19,74 @@ gs_err_t gs_thread_init(struct gs_thread *thread,char *name , void(*entry)(void 
 		                                   thread->parameter,
 							               (void *)((char *)thread->stack_addr + thread->stack_size - 4) );
     
+    thread->current_priority = priority ;
+    thread->init_priority = priority ;
+    thread->number_mask = 0;
+    
+    thread->error = GS_EOK;
+    thread->stat = GS_THREAD_INIT;
+    
+    return GS_EOK;
+}
+
+gs_err_t gs_thread_resume(struct gs_thread * thread)
+{
+    register gs_base_t temp ;
+    
+    if((thread->stat & GS_THREAD_STAT_MASK) != GS_THREAD_SUSPEND)
+    {
+        return -GS_ERROR;
+    }
+    
+    temp = gs_hw_interrupt_disable();
+    
+    gs_list_remove(&(thread->tlist));
+    
+    gs_hw_interrupt_enable(temp);
+    
+    gs_schedule_insert_thread(thread);
+    
+    return GS_EOK ;
+}
+
+gs_err_t gs_thread_startup(struct gs_thread * thread)
+{
+    thread->current_priority = thread->init_priority;
+    thread->number_mask = 1L << thread->current_priority ;
+    
+    thread->stat = GS_THREAD_SUSPEND;
+    
+    gs_thread_resume(thread);
+    
+    if(gs_thread_self() != GS_NULL)
+    {
+        gs_schedule();
+    }
+    
     return GS_EOK;
 }
 
 void gs_thread_delay(gs_tick_t tick)
 {
     struct gs_thread *thread;
+    register gs_ubase_t temp;
     
-    thread = gs_current_thread;
+    temp = gs_hw_interrupt_disable();
     
+    thread = gs_current_thread;   
     thread->remaining_tick = tick ;
+    
+    thread->current_priority = GS_THREAD_SUSPEND;
+    gs_thread_ready_priority_group &= ~thread->number_mask;
+    
+    gs_hw_interrupt_enable(temp);
+    
     
     gs_schedule();
     
+}
+
+gs_thread_t gs_thread_self(void)
+{
+    return gs_current_thread;
 }

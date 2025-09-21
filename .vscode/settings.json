@@ -2,6 +2,7 @@
     "files.associations": {
         "gsthread.h": "c",
         "gsdef.h": "c",
-        "gshw.h": "c"
+        "gshw.h": "c",
+        "gsconfig.h": "c"
     }
 }

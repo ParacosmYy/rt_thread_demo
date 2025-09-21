@@ -24,3 +24,20 @@ char *gs_strncpy(char *des ,const char *src , gs_ubase_t n)
     
 }
 
+int __gs_ffs(int value)
+{
+     if(value == 0)
+     {
+        return 0;
+     }
+    else
+    {
+        int position = 0 ;
+        while((value & 1) == 0)
+        {
+            value >>= 1;
+            position++ ;
+        }
+        return position;
+    }
+}
