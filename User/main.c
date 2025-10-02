@@ -4,10 +4,11 @@
 
 gs_uint8_t flag1 ;
 gs_uint8_t flag2 ;
-
+gs_uint8_t flag3 ;
 
 struct gs_thread gs_thread_flag1;
 struct gs_thread gs_thread_flag2;
+struct gs_thread gs_thread_flag3;
 
 extern gs_list_t gs_thread_priority_table[GS_THREAD_PRIORITY_MAX];
 
@@ -15,11 +16,12 @@ ALIGN(GS_ALIGN_SIZE)
 /* 定义线程栈 */
 gs_uint8_t gs_flag1_thread_stack[512];
 gs_uint8_t gs_flag2_thread_stack[512];
+gs_uint8_t gs_flag3_thread_stack[512];
 
 /* 线程声明 */
 void flag1_thread_entry(void *p_arg);
 void flag2_thread_entry(void *p_arg);
-
+void flag3_thread_entry(void *p_arg);
 
 
 
@@ -37,7 +39,7 @@ int main(void)
     
     gs_thread_idle_init();	
 	
-	
+	gs_system_timer_init();
 
 	gs_thread_init( &gs_thread_flag1,   
                     "thread1vs",
@@ -61,6 +63,15 @@ int main(void)
 //  gs_list_insert_before( &(gs_thread_priority_table[1]),&(gs_thread_flag2.tlist) );
 	gs_thread_startup(&gs_thread_flag2);
 
+    gs_thread_init( &gs_thread_flag3, 
+                    "thread3vs",
+	                flag3_thread_entry,             
+	                GS_NULL,                        
+	                &gs_flag3_thread_stack[0],      
+	                sizeof(gs_flag3_thread_stack) ,
+                    4    );                
+    gs_thread_startup(&gs_thread_flag3);     
+                    
 	gs_system_scheduler_start(); 
 }
 
@@ -75,9 +86,9 @@ void flag1_thread_entry( void *p_arg )
 	for( ;; )
 	{
 		flag1 = 1;
-		gs_thread_delay(2);
+		gs_thread_delay(4);
 		flag1 = 0;
-		gs_thread_delay(2);
+		gs_thread_delay(4);
        // gs_schedule();
 	}
 }
@@ -96,6 +107,18 @@ void flag2_thread_entry( void *p_arg )
 	}
 }
 
+void flag3_thread_entry( void *p_arg )
+{
+	for( ;; )
+	{
+		flag3 = 1;
+		gs_thread_delay(3);
+		flag3 = 0;
+		gs_thread_delay(3);
+		//gs_schedule();
+
+	}
+}
 
 void SysTick_Handler(void)
 {

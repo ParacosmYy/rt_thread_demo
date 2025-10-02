@@ -186,7 +186,7 @@ void gs_schedule(void)
         
         gs_thread_ready_priority = __gs_ffs(gs_thread_ready_priority_group) ;
         
-        to_thread = gs_list_entry(gs_thread_priority_table[gs_thread_ready_priority].next , struct gs_thread , tlist);
+         to_thread = gs_list_entry(gs_thread_priority_table[gs_thread_ready_priority].next , struct gs_thread , tlist);
 
         if(to_thread != gs_current_thread)
         {

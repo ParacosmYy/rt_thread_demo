@@ -28,6 +28,17 @@ typedef gs_ubase_t                      gs_size_t;      /**< Type for size numbe
 typedef gs_ubase_t                      gs_dev_t;       /**< Type for device */
 typedef gs_base_t                       gs_off_t;       /**< Type for offset */
 
+
+/* 布尔类型宏定义 */
+#define GS_TRUE                         1               /**< boolean true  */
+#define GS_FALSE                        0               /**< boolean fails */
+
+/* maximum value of base type */
+#define GS_UINT8_MAX                    0xff            /**< Maxium number of UINT8 */
+#define GS_UINT16_MAX                   0xffff          /**< Maxium number of UINT16 */
+#define GS_UINT32_MAX                   0xffffffff      /**< Maxium number of UINT32 */
+#define GS_TICK_MAX                     GS_UINT32_MAX   /**< Maxium number of tick */
+
 /* boolean type definitions */
 #define GS_TRUE                         1               /**< boolean true  */
 #define GS_FALSE                        0               /**< boolean fails */
@@ -83,38 +94,55 @@ struct gs_object
 {
     char name [GS_NAME_MAX] ;
     gs_uint8_t type ;
-    gs_uint8_t flags; 
+    gs_uint8_t flag; 
     gs_list_t list;
 };
 typedef struct gs_object *gs_object_t ;
 
 
-struct gs_thread
+
+
+/**
+ * 时钟 & 定时器 宏定义
+ */
+#define GS_TIMER_FLAG_DEACTIVATED       0x0     /* 定时器没有激活 */
+#define GS_TIMER_FLAG_ACTIVATED         0x1     /* 定时器已经激活 */
+#define GS_TIMER_FLAG_ONE_SHOT          0x0     /* 单次定时 */
+#define GS_TIMER_FLAG_PERIODIC          0x2     /* 周期定时 */
+        
+#define GS_TIMER_FLAG_HARD_TIMER        0x0     /* 硬件定时器，定时器回调函数在 tick isr中调用 */
+        
+#define GS_TIMER_FLAG_SOFT_TIMER        0x4     /* 软件定时器，定时器回调函数在定时器线程中调用 */
+        
+        
+#define GS_TIMER_CTRL_SET_TIME          0x0     /* 设置定时器定时时间 */
+#define GS_TIMER_CTRL_GET_TIME          0x1     /* 获取定时器定时时间 */
+#define GS_TIMER_CTRL_SET_ONESHOT       0x2     /* 修改定时器为一次定时 */
+#define GS_TIMER_CTRL_SET_PERIODIC      0x3     /* 修改定时器为周期定时 */
+        
+#ifndef GS_TIMER_SKIP_LIST_LEVEL
+#define GS_TIMER_SKIP_LIST_LEVEL          1
+#endif
+
+/* 1 or 3 */
+#ifndef GS_TIMER_SKIP_LIST_MASK
+#define GS_TIMER_SKIP_LIST_MASK         0x3
+#endif
+
+
+struct gs_timer
 {
-    char name [GS_NAME_MAX] ;
-    gs_uint8_t type;
-    gs_uint8_t flags;
-    gs_list_t list;
-    
-    
-	void        *sp;	          /* 线程栈指针 */
-	void        *entry;	          /* 线程入口地址 */
-	void        *parameter;	      /* 线程形参 */	
-	void        *stack_addr;      /* 线程起始地址 */
-	gs_uint32_t stack_size;       /* 线程栈大小，单位为字节 */
-	
-	gs_list_t   tlist;            /* 线程链表节点 */
-    
-    gs_ubase_t remaining_tick ;
-    
-    gs_uint8_t  current_priority;     /* 当前优先级 */
-    gs_uint8_t  init_priority;        /* 初始优先级 */
-    gs_uint32_t number_mask;          /* 当前优先级掩码 */
-    
-    gs_err_t    error;                /* 错误码 */
-    gs_uint8_t  stat;                 /* 线程的状态 */
+    struct gs_object parent;                         /* 从 rt_object 继承 */
+
+    gs_list_t row[GS_TIMER_SKIP_LIST_LEVEL];
+
+    void (*timeout_func)(void *parameter);           /* 超时函数 */
+    void            *parameter;                      /* 超时函数形参 */
+
+    gs_tick_t        init_tick;                      /* 定时器实际需要延时的时间 */
+    gs_tick_t        timeout_tick;                   /* 定时器实际超时时的系统节拍数 */
 };
-typedef struct gs_thread *gs_thread_t;
+typedef struct gs_timer *gs_timer_t;
 
 /**
  * 对象类型由下面的宏来使能，这些宏通常在gsconfig.h中定义
@@ -161,6 +189,35 @@ struct gs_object_information
     gs_size_t                 object_size;              /* 对象大小 */
 };
 
+struct gs_thread
+{
+    char name [GS_NAME_MAX] ;
+    gs_uint8_t type;
+    gs_uint8_t flags;
+    gs_list_t list;
+    
+    
+	void        *sp;	          /* 线程栈指针 */
+	void        *entry;	          /* 线程入口地址 */
+	void        *parameter;	      /* 线程形参 */	
+	void        *stack_addr;      /* 线程起始地址 */
+	gs_uint32_t stack_size;       /* 线程栈大小，单位为字节 */
+	
+	gs_list_t   tlist;            /* 线程链表节点 */
+    
+    gs_ubase_t remaining_tick ;
+    
+    gs_uint8_t  current_priority;     /* 当前优先级 */
+    gs_uint8_t  init_priority;        /* 初始优先级 */
+    gs_uint32_t number_mask;          /* 当前优先级掩码 */
+    
+    gs_err_t    error;                /* 错误码 */
+    gs_uint8_t  stat;                 /* 线程的状态 */
+    
+    struct gs_timer thread_timer;     /* 内置的线程定时器 */
+};
+typedef struct gs_thread *gs_thread_t;
+
 /*
  * 线程状态定义
  */
@@ -176,5 +233,8 @@ struct gs_object_information
 #define GS_THREAD_STAT_SIGNAL_READY     (GS_THREAD_STAT_SIGNAL | GS_THREAD_READY)
 #define GS_THREAD_STAT_SIGNAL_SUSPEND   0x20
 #define GS_THREAD_STAT_SIGNAL_MASK      0xf0
+
+
+
 
 #endif  /* __GS_DEF_H__ */

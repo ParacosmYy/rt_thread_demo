@@ -10,6 +10,7 @@
 ".\objects\idle.o"
 ".\objects\irq.o"
 ".\objects\clock.o"
+".\objects\timer.o"
 ".\objects\startup_armcm4.o"
 ".\objects\system_armcm4.o"
 --strict --scatter ".\Objects\YH-RT-Thread.sct"

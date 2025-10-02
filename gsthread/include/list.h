@@ -30,8 +30,11 @@ gs_inline void gs_list_insert_before(gs_list_t* list, gs_list_t* new_node)
 gs_inline void gs_list_remove(gs_list_t* new_node)
 {
     new_node->next->prev = new_node->prev;
-    new_node->prev = new_node->next;
-    new_node->prev=new_node->next=new_node;
+    new_node->prev->next = new_node->next;
+   //new_node->prev = new_node->next;
+   // new_node->prev=new_node->next=new_node;
+    new_node->next = new_node ;
+    new_node->prev = new_node ;
 }
 
 gs_inline int gs_list_isempty(const gs_list_t *l)
