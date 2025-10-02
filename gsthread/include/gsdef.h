@@ -202,10 +202,14 @@ struct gs_thread
 	void        *parameter;	      /* 线程形参 */	
 	void        *stack_addr;      /* 线程起始地址 */
 	gs_uint32_t stack_size;       /* 线程栈大小，单位为字节 */
+    
+
 	
 	gs_list_t   tlist;            /* 线程链表节点 */
     
     gs_ubase_t remaining_tick ;
+    gs_ubase_t init_tick;
+    
     
     gs_uint8_t  current_priority;     /* 当前优先级 */
     gs_uint8_t  init_priority;        /* 初始优先级 */

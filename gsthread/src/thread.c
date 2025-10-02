@@ -6,7 +6,9 @@
 
 extern struct gs_thread *gs_current_thread;
 extern gs_uint32_t gs_thread_ready_priority_group ;
-gs_err_t gs_thread_init(struct gs_thread *thread,char *name , void(*entry)(void *parameter),void* parameter , void* stack_addr,gs_uint32_t stack_size,gs_uint8_t priority)
+extern gs_list_t gs_thread_priority_table[GS_THREAD_PRIORITY_MAX];
+
+gs_err_t gs_thread_init(struct gs_thread *thread,char *name , void(*entry)(void *parameter),void* parameter , void* stack_addr,gs_uint32_t stack_size,gs_uint8_t priority,gs_uint32_t tick)
 {
     gs_object_init((gs_object_t)thread,GS_Object_Class_Thread,name);
     gs_list_init(&thread->tlist);
@@ -27,6 +29,9 @@ gs_err_t gs_thread_init(struct gs_thread *thread,char *name , void(*entry)(void 
     
     thread->error = GS_EOK;
     thread->stat = GS_THREAD_INIT;
+    
+    thread->init_tick = tick;
+    thread->remaining_tick = tick;
     
     gs_timer_init(&(thread->thread_timer),     
                   thread->name,                
@@ -182,3 +187,29 @@ void gs_thread_timeout(void *parameter)
     gs_schedule();
 }
 
+gs_err_t gs_thread_yield(void)
+{
+    register gs_base_t level;
+    struct gs_thread * thread;
+    
+    level = gs_hw_interrupt_disable();
+    
+    thread = gs_current_thread;
+    
+    if((thread->stat & GS_THREAD_STAT_MASK) == GS_THREAD_READY && thread->tlist.next != thread->tlist.prev)
+    {
+        gs_list_remove(&(thread->tlist));
+        
+        gs_list_insert_before(&(gs_thread_priority_table[thread->current_priority]),&(thread->tlist));
+        
+        gs_hw_interrupt_enable(level);
+        
+        gs_schedule();
+        
+        return GS_EOK;
+    }
+    
+    gs_hw_interrupt_enable(level);
+    
+    return GS_EOK;    
+}

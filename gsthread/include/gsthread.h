@@ -8,7 +8,7 @@
 #include <list.h>
 
 //-------------------------线程接口--------------------------------
-gs_err_t gs_thread_init(struct gs_thread *thread,char *name , void(*entry)(void *parameter),void* parameter , void* stack_addr,gs_uint32_t stack_size,gs_uint8_t priority);
+gs_err_t gs_thread_init(struct gs_thread *thread,char *name , void(*entry)(void *parameter),void* parameter , void* stack_addr,gs_uint32_t stack_size,gs_uint8_t priority,gs_uint32_t tick);
 gs_err_t gs_thread_resume(struct gs_thread * thread);
 gs_thread_t gs_thread_self(void);
 gs_err_t gs_thread_delay(gs_tick_t tick);
@@ -36,6 +36,7 @@ void gs_timer_init(gs_timer_t  timer,
                    void       *parameter,
                    gs_tick_t   time,
                    gs_uint8_t  flag);
+void gs_system_timer_init(void);
 //-------------------------空闲线程接口------------------------------
 void gs_thread_idle_init(void);	
 

@@ -21,13 +21,147 @@ Target DLL:      UL2CM3.DLL V1.160.3.0
 Dialog DLL:      TCM.DLL V1.32.0.0
  
 <h2>Project:</h2>
-E:\Embedded_system\Project_rtos\类rt_thread\gs_thread_demo4 - 副本\Project\Fire_RT-Thread.uvprojx
+E:\Embedded_system\Project_rtos\类rt_thread\gs_thread_demo6\Project\Fire_RT-Thread.uvprojx
 Project File Date:  10/01/2025
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 5 (build 528)', folder: 'D:\keil5\ARM\ARMCC\Bin'
 Build target 'Target 1'
-".\Objects\YH-RT-Thread.axf" - 0 Error(s), 0 Warning(s).
+compiling thread.c...
+..\gsthread\include\gsthread.h(45): warning:  #1295-D: Deprecated declaration gs_interrupt_enter - give arg types
+  void gs_interrupt_enter();
+..\gsthread\include\gsthread.h(46): warning:  #1295-D: Deprecated declaration gs_interrupt_leave - give arg types
+  void gs_interrupt_leave();    
+..\gsthread\include\object.h(165): warning:  #223-D: function "gs_hw_interrupt_disable" declared implicitly
+      temp = gs_hw_interrupt_disable();
+..\gsthread\include\object.h(169): warning:  #223-D: function "gs_hw_interrupt_enable" declared implicitly
+      gs_hw_interrupt_enable(temp);
+..\gsthread\include\object.h(171): warning:  #1-D: last line of file ends without a newline
+  }
+..\gsthread\src\thread.c(55): warning:  #223-D: function "gs_hw_interrupt_disable" declared implicitly
+      temp = gs_hw_interrupt_disable();
+..\gsthread\src\thread.c(59): warning:  #223-D: function "gs_hw_interrupt_enable" declared implicitly
+      gs_hw_interrupt_enable(temp);
+..\gsthread\src\thread.c(125): warning:  #223-D: function "gs_hw_interrupt_disable" declared implicitly
+      temp = gs_hw_interrupt_disable();
+..\gsthread\src\thread.c(133): warning:  #223-D: function "gs_timer_stop" declared implicitly
+      gs_timer_stop(&(thread->thread_timer));
+..\gsthread\src\thread.c(136): warning:  #223-D: function "gs_hw_interrupt_enable" declared implicitly
+      gs_hw_interrupt_enable(temp);
+..\gsthread\src\thread.c(148): warning:  #223-D: function "gs_hw_interrupt_disable" declared implicitly
+      temp = gs_hw_interrupt_disable();
+..\gsthread\src\thread.c(157): warning:  #223-D: function "gs_timer_control" declared implicitly
+      gs_timer_control(&(thread->thread_timer), GS_TIMER_CTRL_SET_TIME, &tick);
+..\gsthread\src\thread.c(160): warning:  #223-D: function "gs_timer_start" declared implicitly
+      gs_timer_start(&(thread->thread_timer));
+..\gsthread\src\thread.c(163): warning:  #223-D: function "gs_hw_interrupt_enable" declared implicitly
+      gs_hw_interrupt_enable(temp);
+..\gsthread\src\thread.c(195): warning:  #223-D: function "gs_hw_interrupt_disable" declared implicitly
+      level = gs_hw_interrupt_disable();
+..\gsthread\src\thread.c(205): warning:  #223-D: function "gs_hw_interrupt_enable" declared implicitly
+          gs_hw_interrupt_enable(level);
+..\gsthread\src\thread.c(212): warning:  #223-D: function "gs_hw_interrupt_enable" declared implicitly
+      gs_hw_interrupt_enable(level);
+..\gsthread\src\thread.c(215): warning:  #1-D: last line of file ends without a newline
+  }
+..\gsthread\src\thread.c: 18 warnings, 0 errors
+compiling scheduler.c...
+..\gsthread\include\gsthread.h(45): warning:  #1295-D: Deprecated declaration gs_interrupt_enter - give arg types
+  void gs_interrupt_enter();
+..\gsthread\include\gsthread.h(46): warning:  #1295-D: Deprecated declaration gs_interrupt_leave - give arg types
+  void gs_interrupt_leave();    
+..\gsthread\src\scheduler.c(70): warning:  #223-D: function "gs_hw_interrupt_disable" declared implicitly
+      temp = gs_hw_interrupt_disable();
+..\gsthread\src\scheduler.c(78): warning:  #223-D: function "gs_hw_interrupt_enable" declared implicitly
+      gs_hw_interrupt_enable(temp);
+..\gsthread\src\scheduler.c(85): warning:  #223-D: function "gs_hw_interrupt_disable" declared implicitly
+      temp = gs_hw_interrupt_disable();
+..\gsthread\src\scheduler.c(93): warning:  #223-D: function "gs_hw_interrupt_enable" declared implicitly
+      gs_hw_interrupt_enable(temp);
+..\gsthread\src\scheduler.c(185): warning:  #223-D: function "gs_hw_interrupt_disable" declared implicitly
+          level = gs_hw_interrupt_disable();
+..\gsthread\src\scheduler.c(197): warning:  #223-D: function "gs_hw_interrupt_enable" declared implicitly
+              gs_hw_interrupt_enable(level);
+..\gsthread\src\scheduler.c(201): warning:  #223-D: function "gs_hw_interrupt_enable" declared implicitly
+              gs_hw_interrupt_enable(level);
+..\gsthread\src\scheduler.c(205): warning:  #1-D: last line of file ends without a newline
+  }
+..\gsthread\src\scheduler.c: 10 warnings, 0 errors
+compiling cpuport.c...
+..\gsthread\include\gsthread.h(45): warning:  #1295-D: Deprecated declaration gs_interrupt_enter - give arg types
+  void gs_interrupt_enter();
+..\gsthread\include\gsthread.h(46): warning:  #1295-D: Deprecated declaration gs_interrupt_leave - give arg types
+  void gs_interrupt_leave();    
+..\gsthread\libcpu\arm\cortex-m4\cpuport.c(71): warning:  #1-D: last line of file ends without a newline
+  }
+..\gsthread\libcpu\arm\cortex-m4\cpuport.c: 3 warnings, 0 errors
+compiling irq.c...
+..\gsthread\include\gsthread.h(45): warning:  #1295-D: Deprecated declaration gs_interrupt_enter - give arg types
+  void gs_interrupt_enter();
+..\gsthread\include\gsthread.h(46): warning:  #1295-D: Deprecated declaration gs_interrupt_leave - give arg types
+  void gs_interrupt_leave();    
+..\gsthread\src\irq.c(9): warning:  #223-D: function "gs_hw_interrupt_disable" declared implicitly
+      level = gs_hw_interrupt_disable();
+..\gsthread\src\irq.c(11): warning:  #223-D: function "gs_hw_interrupt_enable" declared implicitly
+      gs_hw_interrupt_enable(level);
+..\gsthread\src\irq.c(18): warning:  #223-D: function "gs_hw_interrupt_disable" declared implicitly
+      level = gs_hw_interrupt_disable();
+..\gsthread\src\irq.c(20): warning:  #223-D: function "gs_hw_interrupt_enable" declared implicitly
+      gs_hw_interrupt_enable(level);
+..\gsthread\src\irq.c: 6 warnings, 0 errors
+compiling timer.c...
+..\gsthread\include\gsthread.h(45): warning:  #1295-D: Deprecated declaration gs_interrupt_enter - give arg types
+  void gs_interrupt_enter();
+..\gsthread\include\gsthread.h(46): warning:  #1295-D: Deprecated declaration gs_interrupt_leave - give arg types
+  void gs_interrupt_leave();    
+..\gsthread\src\timer.c(57): warning:  #223-D: function "gs_object_init" declared implicitly
+      gs_object_init((gs_object_t)timer, GS_Object_Class_Timer, name);
+..\gsthread\src\timer.c(82): warning:  #223-D: function "gs_hw_interrupt_disable" declared implicitly
+      level = gs_hw_interrupt_disable();
+..\gsthread\src\timer.c(88): warning:  #223-D: function "gs_hw_interrupt_enable" declared implicitly
+      gs_hw_interrupt_enable(level);
+..\gsthread\src\timer.c(132): warning:  #223-D: function "gs_hw_interrupt_disable" declared implicitly
+      level = gs_hw_interrupt_disable();
+..\gsthread\src\timer.c(141): warning:  #223-D: function "gs_hw_interrupt_enable" declared implicitly
+      gs_hw_interrupt_enable(level);
+..\gsthread\src\timer.c(232): warning:  #223-D: function "gs_hw_interrupt_disable" declared implicitly
+      level = gs_hw_interrupt_disable();
+..\gsthread\src\timer.c(270): warning:  #223-D: function "gs_hw_interrupt_enable" declared implicitly
+      gs_hw_interrupt_enable(level);
+..\gsthread\src\timer.c: 9 warnings, 0 errors
+compiling idle.c...
+..\gsthread\include\gsthread.h(45): warning:  #1295-D: Deprecated declaration gs_interrupt_enter - give arg types
+  void gs_interrupt_enter();
+..\gsthread\include\gsthread.h(46): warning:  #1295-D: Deprecated declaration gs_interrupt_leave - give arg types
+  void gs_interrupt_leave();    
+..\gsthread\src\idle.c: 2 warnings, 0 errors
+compiling clock.c...
+..\gsthread\include\gsthread.h(45): warning:  #1295-D: Deprecated declaration gs_interrupt_enter - give arg types
+  void gs_interrupt_enter();
+..\gsthread\include\gsthread.h(46): warning:  #1295-D: Deprecated declaration gs_interrupt_leave - give arg types
+  void gs_interrupt_leave();    
+..\gsthread\src\clock.c(44): warning:  #223-D: function "gs_thread_yield" declared implicitly
+          gs_thread_yield();
+..\gsthread\src\clock.c: 3 warnings, 0 errors
+compiling kservice.c...
+..\gsthread\include\gsthread.h(45): warning:  #1295-D: Deprecated declaration gs_interrupt_enter - give arg types
+  void gs_interrupt_enter();
+..\gsthread\include\gsthread.h(46): warning:  #1295-D: Deprecated declaration gs_interrupt_leave - give arg types
+  void gs_interrupt_leave();    
+..\gsthread\src\kservice.c(43): warning:  #1-D: last line of file ends without a newline
+  }
+..\gsthread\src\kservice.c: 3 warnings, 0 errors
+compiling main.c...
+..\gsthread\include\gsthread.h(45): warning:  #1295-D: Deprecated declaration gs_interrupt_enter - give arg types
+  void gs_interrupt_enter();
+..\gsthread\include\gsthread.h(46): warning:  #1295-D: Deprecated declaration gs_interrupt_leave - give arg types
+  void gs_interrupt_leave();    
+..\User\main.c(32): warning:  #223-D: function "gs_hw_interrupt_disable" declared implicitly
+      gs_hw_interrupt_disable();
+..\User\main.c: 3 warnings, 0 errors
+linking...
+Program Size: Code=2996 RO-data=224 RW-data=96 ZI-data=6960  
+".\Objects\YH-RT-Thread.axf" - 0 Error(s), 57 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -50,7 +184,7 @@ Package Vendor: ARM
       Source file:   Device\ARM\ARMCM4\Source\system_ARMCM4.c
 
    * Component: ARM::CMSIS:CORE:5.0.1
-Build Time Elapsed:  00:00:02
+Build Time Elapsed:  00:00:03
 </pre>
 </body>
 </html>

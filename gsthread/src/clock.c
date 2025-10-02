@@ -30,10 +30,19 @@ extern gs_uint32_t gs_thread_ready_priority_group ;
 
 void gs_tick_increase(void)
 {
+    struct gs_thread * thread;
     
     ++ gs_tick;
     
+    thread = gs_thread_self();
+    
+    --thread->remaining_tick;
 
+    if(thread->remaining_tick == 0)
+    {
+        thread->remaining_tick = thread->init_tick;
+        gs_thread_yield();
+    }
     gs_timer_check();
 }
 

@@ -34,12 +34,13 @@ int main(void)
     /* SysTick÷–∂œ∆µ¬ …Ë÷√ */
     SysTick_Config( SystemCoreClock / GS_TICK_PER_SECOND );
 	
+    gs_system_timer_init();
     
 	gs_system_scheduler_init();
     
     gs_thread_idle_init();	
 	
-	gs_system_timer_init();
+	
 
 	gs_thread_init( &gs_thread_flag1,   
                     "thread1vs",
@@ -47,7 +48,8 @@ int main(void)
 	                GS_NULL,                          
 	                &gs_flag1_thread_stack[0],        
 	                sizeof(gs_flag1_thread_stack),
-                    2    );  
+                    2,
+                    4);  
 	
 	//gs_list_insert_before( &(gs_thread_priority_table[0]),&(gs_thread_flag1.tlist) );
 	gs_thread_startup(&gs_thread_flag1);
@@ -58,7 +60,8 @@ int main(void)
 	                GS_NULL,                        
 	                &gs_flag2_thread_stack[0],      
 	                sizeof(gs_flag2_thread_stack) ,
-                    3    );
+                    4,
+                    2);
 
 //  gs_list_insert_before( &(gs_thread_priority_table[1]),&(gs_thread_flag2.tlist) );
 	gs_thread_startup(&gs_thread_flag2);
@@ -69,7 +72,8 @@ int main(void)
 	                GS_NULL,                        
 	                &gs_flag3_thread_stack[0],      
 	                sizeof(gs_flag3_thread_stack) ,
-                    4    );                
+                    4,
+                    3);                
     gs_thread_startup(&gs_thread_flag3);     
                     
 	gs_system_scheduler_start(); 
@@ -86,9 +90,9 @@ void flag1_thread_entry( void *p_arg )
 	for( ;; )
 	{
 		flag1 = 1;
-		gs_thread_delay(4);
+		gs_thread_delay(3);
 		flag1 = 0;
-		gs_thread_delay(4);
+		gs_thread_delay(3);
        // gs_schedule();
 	}
 }
@@ -99,11 +103,12 @@ void flag2_thread_entry( void *p_arg )
 	for( ;; )
 	{
 		flag2 = 1;
-		gs_thread_delay(2);
+	//	gs_thread_delay(2);
+        delay(100);
 		flag2 = 0;
-		gs_thread_delay(2);
+	//	gs_thread_delay(2);
 		//gs_schedule();
-
+        delay(100);
 	}
 }
 
@@ -112,10 +117,12 @@ void flag3_thread_entry( void *p_arg )
 	for( ;; )
 	{
 		flag3 = 1;
-		gs_thread_delay(3);
+	//	gs_thread_delay(3);
+        delay(100);
 		flag3 = 0;
-		gs_thread_delay(3);
+	//	gs_thread_delay(3);
 		//gs_schedule();
+        delay(100);
 
 	}
 }
