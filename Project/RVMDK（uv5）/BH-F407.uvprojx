@@ -900,6 +900,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\gsthread\src\components.c</FilePath>
             </File>
+            <File>
+              <FileName>ipc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\gsthread\src\ipc.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

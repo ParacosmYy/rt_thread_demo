@@ -53,6 +53,7 @@
 "..\..\output\thread.o"
 "..\..\output\timer.o"
 "..\..\output\components.o"
+"..\..\output\ipc.o"
 "..\..\output\bsp_led.o"
 --library_type=microlib --strict --scatter "..\..\Output\Template.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols

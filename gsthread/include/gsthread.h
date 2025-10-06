@@ -6,9 +6,10 @@
 #include <gsconfig.h>
 #include <gsservice.h>
 #include <list.h>
+#include "./led/bsp_led.h"   
 //-------------------------线程启动初始化接口----------------------
 
-
+void gs_thread_all_init(void);
 //-------------------------线程接口--------------------------------
 gs_err_t gs_thread_init(struct gs_thread *thread,char *name , void(*entry)(void *parameter),void* parameter , void* stack_addr,gs_uint32_t stack_size,gs_uint8_t priority,gs_uint32_t tick);
 gs_err_t gs_thread_resume(struct gs_thread * thread);
@@ -72,5 +73,22 @@ int __gs_ffs(int value);
 
 struct gs_object_information * gs_object_get_infomation(enum gs_object_class_type type);
 void gs_object_init(struct gs_object *object , enum gs_object_class_type type , const char *name);    
+
+//-------------------------链表操作相关接口----------------------------
+gs_inline void gs_list_init(gs_list_t* list);
+gs_inline void gs_list_insert_after(gs_list_t* list, gs_list_t* new_node);
+gs_inline void gs_list_insert_before(gs_list_t* list, gs_list_t* new_node);
+gs_inline void gs_list_remove(gs_list_t* new_node);
+gs_inline int gs_list_isempty(const gs_list_t *l);
+//-------------------------信号量和互斥量相关接口-----------------------
+gs_inline gs_sem_t gs_sem_create(const char* name , gs_uint16_t value , gs_uint8_t flag );
+gs_inline gs_err_t gs_ipc_list_resume(gs_list_t * list);
+gs_inline gs_err_t gs_ipc_list_resume_all(gs_list_t * list);
+gs_err_t gs_sem_delete(gs_sem_t sem);
+gs_inline gs_err_t gs_ipc_list_suspend(gs_list_t        *list,
+                                       struct gs_thread *thread,
+                                       gs_uint8_t        flag);
+gs_err_t gs_sem_take(gs_sem_t sem, gs_int32_t time);                                       
+
 #endif 
 

@@ -82,14 +82,14 @@ typedef gs_base_t                       gs_off_t;       /**< Type for offset */
 #define GS_EIO                          8               /**< IO error */
 #define GS_EINTR                        9               /**< Interrupted system call */
 #define GS_EINVAL                       10              /**< Invalid argument */
-
+//双向链表节点
 struct gs_list_node 
 {
     struct gs_list_node *prev;
     struct gs_list_node *next;
 };
 typedef struct gs_list_node gs_list_t ;			
-
+//内核对象基类
 struct gs_object
 {
     char name [GS_NAME_MAX] ;
@@ -129,7 +129,7 @@ typedef struct gs_object *gs_object_t ;
 #define GS_TIMER_SKIP_LIST_MASK         0x3
 #endif
 
-
+//定时器结构体
 struct gs_timer
 {
     struct gs_object parent;                         /* 从 rt_object 继承 */
@@ -188,7 +188,7 @@ struct gs_object_information
     gs_list_t                 object_list;              /* 对象列表节点 */
     gs_size_t                 object_size;              /* 对象大小 */
 };
-
+//线程控制块结构体
 struct gs_thread
 {
     char name [GS_NAME_MAX] ;
@@ -237,6 +237,31 @@ typedef struct gs_thread *gs_thread_t;
 #define GS_THREAD_STAT_SIGNAL_READY     (GS_THREAD_STAT_SIGNAL | GS_THREAD_READY)
 #define GS_THREAD_STAT_SIGNAL_SUSPEND   0x20
 #define GS_THREAD_STAT_SIGNAL_MASK      0xf0
+
+
+#if GS_USING_SEMAPHORE
+struct  gs_semaphore
+{       
+        char name [GS_NAME_MAX] ;
+		gs_uint8_t flag;
+		gs_list_t suspend_thread;        //挂起队列
+		gs_uint16_t value;
+};
+typedef struct gs_semaphore *gs_sem_t;
+
+struct  gs_mutex
+{       
+        char name [GS_NAME_MAX] ;
+		gs_uint8_t   flag;
+		gs_uint16_t  value;
+		gs_uint8_t   original_priority;    //持有互斥量的线程的原始优先级
+		gs_uint8_t   hold;                 //持有互斥量的线程的持有次数
+	    
+		gs_list_t suspend_thread;        //挂起队列
+		struct gs_thread *owner;              //持有互斥量的线程 
+};
+typedef struct gs_mutex *gs_mutex_t;
+#endif
 
 
 

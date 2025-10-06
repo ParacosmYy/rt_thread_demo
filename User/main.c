@@ -29,10 +29,10 @@ void flag3_thread_entry(void *p_arg);
 
 int main(void)
 {	
-    
+    gs_thread_all_init();
 
 	gs_thread_init( &gs_thread_flag1,   
-                    "thread1vs",
+                    "led",
 	                flag1_thread_entry,               
 	                GS_NULL,                          
 	                &gs_flag1_thread_stack[0],        
@@ -78,11 +78,9 @@ void flag1_thread_entry( void *p_arg )
 {
 	for( ;; )
 	{
-		flag1 = 1;
-		gs_thread_delay(3);
-		flag1 = 0;
-		gs_thread_delay(3);
-       // gs_schedule();
+		LED1_TOGGLE ;
+		gs_thread_delay(2);
+		
 	}
 }
 
@@ -91,13 +89,8 @@ void flag2_thread_entry( void *p_arg )
 {
 	for( ;; )
 	{
-		flag2 = 1;
-	//	gs_thread_delay(2);
-        delay(100);
-		flag2 = 0;
-	//	gs_thread_delay(2);
-		//gs_schedule();
-        delay(100);
+		LED2_TOGGLE ;
+		gs_thread_delay(2);
 	}
 }
 
@@ -105,13 +98,8 @@ void flag3_thread_entry( void *p_arg )
 {
 	for( ;; )
 	{
-		flag3 = 1;
-	//	gs_thread_delay(3);
-        delay(100);
-		flag3 = 0;
-	//	gs_thread_delay(3);
-		//gs_schedule();
-        delay(100);
+		LED3_TOGGLE ;
+		gs_thread_delay(2);
 
 	}
 }

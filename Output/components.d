@@ -4,7 +4,6 @@
 ..\..\output\components.o: ..\..\User\gsconfig.h
 ..\..\output\components.o: ..\..\gsthread\include\gsservice.h
 ..\..\output\components.o: ..\..\gsthread\include\list.h
-..\..\output\components.o: ..\..\gsthread\include\gshw.h
 ..\..\output\components.o: ..\..\User\./led/bsp_led.h
 ..\..\output\components.o: ..\..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 ..\..\output\components.o: ..\..\Libraries\CMSIS\Include\core_cm4.h
@@ -41,3 +40,6 @@
 ..\..\output\components.o: ..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dac.h
 ..\..\output\components.o: ..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dcmi.h
 ..\..\output\components.o: ..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_fsmc.h
+..\..\output\components.o: ..\..\gsthread\include\gshw.h
+..\..\output\components.o: ..\..\User\./usart/bsp_debug_usart.h
+..\..\output\components.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdio.h

@@ -1,7 +1,7 @@
 #include <gsthread.h>
 #include <gshw.h>
 #include "./led/bsp_led.h"   
-
+#include "./usart/bsp_debug_usart.h"
 
 void gs_thread_all_init()
 {
@@ -17,5 +17,7 @@ void gs_thread_all_init()
     
     gs_thread_idle_init();
 
-	LED_GPIO_Config();
+	LED_GPIO_Config();  
+    
+    Debug_USART_Config();//usart 1
 }

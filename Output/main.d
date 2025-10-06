@@ -41,3 +41,4 @@
 ..\..\output\main.o: ..\..\User\gsconfig.h
 ..\..\output\main.o: ..\..\gsthread\include\gsservice.h
 ..\..\output\main.o: ..\..\gsthread\include\list.h
+..\..\output\main.o: ..\..\User\./led/bsp_led.h

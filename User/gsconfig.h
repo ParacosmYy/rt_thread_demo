@@ -9,6 +9,11 @@
 
 #define GS_TICK_PER_SECOND	    1000
 
+#define GS_USING_SEMAPHORE      1
+#define GS_SEM_NUM_MAX			50
+
+#define GS_IPC_FLAG_FIFO 0
+#define GS_IPC_FLAG_PRIO 1
 
 #endif /* __RTTHREAD_CFG_H__ */
 
