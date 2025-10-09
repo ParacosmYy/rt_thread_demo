@@ -43,3 +43,4 @@
 ..\..\output\components.o: ..\..\gsthread\include\gshw.h
 ..\..\output\components.o: ..\..\User\./usart/bsp_debug_usart.h
 ..\..\output\components.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdio.h
+..\..\output\components.o: ..\..\User\./key/bsp_key.h

@@ -54,7 +54,10 @@
 "..\..\output\timer.o"
 "..\..\output\components.o"
 "..\..\output\ipc.o"
+"..\..\output\shell.o"
+"..\..\output\cmd.o"
 "..\..\output\bsp_led.o"
+"..\..\output\bsp_key.o"
 --library_type=microlib --strict --scatter "..\..\Output\Template.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

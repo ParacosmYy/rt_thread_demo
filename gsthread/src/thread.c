@@ -8,10 +8,16 @@ extern struct gs_thread *gs_current_thread;
 extern gs_uint32_t gs_thread_ready_priority_group ;
 extern gs_list_t gs_thread_priority_table[GS_THREAD_PRIORITY_MAX];
 
+extern gs_thread_t thread_array[GS_THREAD_NUM_MAX];
+extern gs_size_t thread_cnt;
+
 gs_err_t gs_thread_init(struct gs_thread *thread,char *name , void(*entry)(void *parameter),void* parameter , void* stack_addr,gs_uint32_t stack_size,gs_uint8_t priority,gs_uint32_t tick)
 {
     gs_object_init((gs_object_t)thread,GS_Object_Class_Thread,name);
     gs_list_init(&thread->tlist);
+    
+    thread_array[thread_cnt]=thread;
+	thread_cnt++;
     
     thread->entry = (void*)entry;
     thread->parameter = parameter;
@@ -105,6 +111,16 @@ gs_err_t gs_thread_delay(gs_tick_t tick)
     return gs_thread_sleep(tick);
 } 
 
+void gs_thread_delay_ms(gs_tick_t ms)
+{
+    gs_thread_delay(ms);
+}
+
+void gs_thread_delay_s(gs_tick_t s)
+{
+    gs_thread_delay(s*1000);
+}
+
 gs_thread_t gs_thread_self(void)
 {
     return gs_current_thread;
@@ -116,7 +132,7 @@ gs_err_t gs_thread_suspend(gs_thread_t thread)
 
 
     
-    if ((thread->stat & GS_THREAD_STAT_MASK) != GS_THREAD_READY)
+    if ((thread->stat & GS_THREAD_STAT_MASK) != GS_THREAD_READY) //就绪态则挂起
     {
         return -GS_ERROR;
     }
@@ -127,7 +143,7 @@ gs_err_t gs_thread_suspend(gs_thread_t thread)
    
     thread->stat = GS_THREAD_SUSPEND;
 
-    gs_schedule_remove_thread(thread);
+    gs_schedule_remove_thread(thread);//从就绪链表中删除 然后位掩码置0
 
 
     gs_timer_stop(&(thread->thread_timer));
@@ -153,7 +169,6 @@ gs_err_t gs_thread_sleep(gs_tick_t tick)
     
     gs_thread_suspend(thread);
 
-    /* 设置线程定时器的超时时间 */
     gs_timer_control(&(thread->thread_timer), GS_TIMER_CTRL_SET_TIME, &tick);
     
 
@@ -212,4 +227,36 @@ gs_err_t gs_thread_yield(void)
     gs_hw_interrupt_enable(level);
     
     return GS_EOK;    
+}
+
+gs_err_t  gs_thread_control(gs_thread_t thread , int cmd , void *arg)
+{
+    register gs_base_t temp ;
+    
+    switch(cmd)
+    {
+        case GS_THREAD_CTRL_CHANGE_PRIORITY :
+             temp = gs_hw_interrupt_disable();
+        
+        if(thread->stat & GS_THREAD_STAT_MASK == GS_THREAD_READY)
+        {
+            gs_schedule_remove_thread(thread);
+            
+            thread->current_priority = *(gs_uint8_t *)arg ;
+            
+            thread->number_mask = 1<<thread->current_priority;
+            
+            gs_schedule_insert_thread(thread);
+        }
+        else
+        {
+            thread->current_priority = *(gs_uint8_t *)arg ;
+            
+            thread->number_mask = 1<<thread->current_priority;
+        }
+        gs_hw_interrupt_enable(temp);
+        
+        break ;
+    }
+    return GS_EOK ;
 }

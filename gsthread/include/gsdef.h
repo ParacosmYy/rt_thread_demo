@@ -2,6 +2,8 @@
 #define __GS_DEF_H__
 
 #include <gsconfig.h>
+
+
 /*
 *************************************************************************
 *                               数据类型
@@ -82,6 +84,8 @@ typedef gs_base_t                       gs_off_t;       /**< Type for offset */
 #define GS_EIO                          8               /**< IO error */
 #define GS_EINTR                        9               /**< Interrupted system call */
 #define GS_EINVAL                       10              /**< Invalid argument */
+
+
 //双向链表节点
 struct gs_list_node 
 {
@@ -239,7 +243,20 @@ typedef struct gs_thread *gs_thread_t;
 #define GS_THREAD_STAT_SIGNAL_MASK      0xf0
 
 
-#if GS_USING_SEMAPHORE
+#define GS_THREAD_CTRL_STARTUP          0x00                /**< Startup thread. */
+#define GS_THREAD_CTRL_CLOSE            0x01                /**< Close thread. */
+#define GS_THREAD_CTRL_CHANGE_PRIORITY  0x02                /**< Change thread priority. */
+#define GS_THREAD_CTRL_INFO             0x03                /**< Get thread information. */
+#define GS_THREAD_CTRL_BIND_CPU         0x04                /**< Set thread bind cpu. */
+        
+#define GS_THREAD_CTRL_STARTUP          0x00                /**< Startup thread. */
+#define GS_THREAD_CTRL_CLOSE            0x01                /**< Close thread. */
+#define GS_THREAD_CTRL_CHANGE_PRIORITY  0x02                /**< Change thread priority. */
+#define GS_THREAD_CTRL_INFO             0x03                /**< Get thread information. */
+
+
+
+//#if GS_USING_SEMAPHORE
 struct  gs_semaphore
 {       
         char name [GS_NAME_MAX] ;
@@ -261,7 +278,9 @@ struct  gs_mutex
 		struct gs_thread *owner;              //持有互斥量的线程 
 };
 typedef struct gs_mutex *gs_mutex_t;
-#endif
+
+
+//#endif
 
 
 

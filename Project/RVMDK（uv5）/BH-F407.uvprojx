@@ -336,7 +336,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F40_41xxx,</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\Libraries\CMSIS\Device\ST\STM32F4xx\Include;..\..\Libraries\CMSIS\Include;..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc;..\..\User;..\..\gsthread\include;..\..\gsthread\libcpu;..\..\gsthread\src</IncludePath>
+              <IncludePath>..\..\Libraries\CMSIS\Device\ST\STM32F4xx\Include;..\..\Libraries\CMSIS\Include;..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc;..\..\User;..\..\gsthread\include;..\..\gsthread\libcpu;..\..\gsthread\src;..\..\gsthread\src</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -909,6 +909,28 @@
         </Group>
         <Group>
           <GroupName>shell</GroupName>
+          <Files>
+            <File>
+              <FileName>shell.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\gsthread\components\shell.c</FilePath>
+            </File>
+            <File>
+              <FileName>shell.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\gsthread\components\shell.h</FilePath>
+            </File>
+            <File>
+              <FileName>cmd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\gsthread\components\cmd.c</FilePath>
+            </File>
+            <File>
+              <FileName>cmd.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\gsthread\components\cmd.h</FilePath>
+            </File>
+          </Files>
         </Group>
         <Group>
           <GroupName>ipc</GroupName>
@@ -925,6 +947,16 @@
               <FileName>bsp_led.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\..\User\led\bsp_led.h</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_key.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\key\bsp_key.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_key.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\User\key\bsp_key.h</FilePath>
             </File>
           </Files>
         </Group>

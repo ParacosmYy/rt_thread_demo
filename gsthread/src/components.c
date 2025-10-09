@@ -2,6 +2,7 @@
 #include <gshw.h>
 #include "./led/bsp_led.h"   
 #include "./usart/bsp_debug_usart.h"
+#include "./key/bsp_key.h" 
 
 void gs_thread_all_init()
 {
@@ -19,5 +20,11 @@ void gs_thread_all_init()
 
 	LED_GPIO_Config();  
     
+    Key_GPIO_Config();
+    
     Debug_USART_Config();//usart 1
+       
+    show_version();
+    
+    gs_shell_init();
 }

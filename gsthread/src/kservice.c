@@ -41,3 +41,14 @@ int __gs_ffs(int value)
         return position;
     }
 }
+
+void show_version(void)
+{
+		
+		printf("--------------------\r\n");
+		printf("|      welcome     |\r\n");
+		printf("|     GS-thread    |\r\n");
+		printf("|    version  is     |\r\n");
+		printf("|        V1.0          |\r\n");
+		printf("--------------------\r\n");
+}

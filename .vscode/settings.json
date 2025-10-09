@@ -1,6 +1,14 @@
 {
     "files.associations": {
         "bsp_debug_usart.h": "c",
-        "gsthread.h": "c"
+        "gsthread.h": "c",
+        "gsservice.h": "c",
+        "bsp_led.h": "c",
+        "gsdef.h": "c",
+        "gsconfig.h": "c",
+        "stm32f4xx.h": "c",
+        "gshw.h": "c",
+        "list.h": "c",
+        "bsp_key.h": "c"
     }
 }
