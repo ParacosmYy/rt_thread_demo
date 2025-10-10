@@ -27,14 +27,24 @@ Project File Date:  10/10/2025
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 5 (build 528)', folder: 'D:\keil5\ARM\ARMCC\Bin'
 Build target 'USART'
-compiling thread.c...
-..\..\gsthread\src\thread.c(262): warning:  #1-D: last line of file ends without a newline
-  }
-..\..\gsthread\src\thread.c: 1 warning, 0 errors
+compiling shell.c...
+..\..\gsthread\include\gsthread.h(110): warning:  #1295-D: Deprecated declaration gs_shell_init - give arg types
+  void gs_shell_init();                                       
+..\..\gsthread\components\shell.h(41): warning:  #1295-D: Deprecated declaration system_cmd_init - give arg types
+  void system_cmd_init();
+..\..\gsthread\components\shell.h(42): warning:  #1295-D: Deprecated declaration gs_shell_init - give arg types
+  void gs_shell_init();
+..\..\gsthread\components\shell.h(44): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\..\gsthread\components\cmd.h(10): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\..\gsthread\components\ringbuffer.h(33): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\..\gsthread\components\shell.c: 6 warnings, 0 errors
 linking...
-Program Size: Code=6068 RO-data=424 RW-data=176 ZI-data=9576  
+Program Size: Code=6720 RO-data=424 RW-data=180 ZI-data=11092  
 FromELF: creating hex file...
-"..\..\Output\Template.axf" - 0 Error(s), 1 Warning(s).
+"..\..\Output\Template.axf" - 0 Error(s), 6 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -48,7 +58,7 @@ Package Vendor: Keil
   D:\keil5\ARM\PACK\Keil\STM32F4xx_DFP\2.15.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include
 
 <h2>Collection of Component Files used:</h2>
-Build Time Elapsed:  00:00:02
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>

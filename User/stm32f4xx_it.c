@@ -145,15 +145,15 @@ void SVC_Handler(void)
 /*  available peripheral interrupt handler's name please refer to the startup */
 /*  file (startup_stm32f429_439xx.s).                         */
 /******************************************************************************/
-void DEBUG_USART_IRQHandler(void)
-{
-  uint8_t ucTemp;
-	if(USART_GetITStatus(DEBUG_USART,USART_IT_RXNE)!=RESET)
-	{		
-		ucTemp = USART_ReceiveData( DEBUG_USART );
-    USART_SendData(DEBUG_USART,ucTemp);    
-	}	 
-}	
+//void DEBUG_USART_IRQHandler(void)
+//{
+//  uint8_t ucTemp;
+//	if(USART_GetITStatus(DEBUG_USART,USART_IT_RXNE)!=RESET)
+//	{		
+//		ucTemp = USART_ReceiveData( DEBUG_USART );
+//    USART_SendData(DEBUG_USART,ucTemp);    
+//	}	 
+//}	
 
 /**
   * @}

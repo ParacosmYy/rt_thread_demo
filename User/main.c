@@ -132,8 +132,8 @@ void flag1_thread_entry( void *p_arg )
 {
 	for( ;; )
 	{
-		//LED1_TOGGLE ;
-		gs_thread_delay(500);
+		LED1_TOGGLE ;
+		gs_thread_delay(1000);
 		
 	}
 }
@@ -143,8 +143,8 @@ void flag2_thread_entry( void *p_arg )
 {
 	for( ;; )
 	{
-		//LED2_TOGGLE ;
-		gs_thread_delay_s(500);
+		LED2_TOGGLE ;
+		gs_thread_delay_ms(1000);
 	}
 }
 
@@ -152,8 +152,8 @@ void flag3_thread_entry( void *p_arg )
 {
 	for( ;; )
 	{
-		//LED3_TOGGLE ;
-		gs_thread_delay(500);
+		LED3_TOGGLE ;
+		gs_thread_delay(1000);
 
 	}
 }
@@ -164,6 +164,7 @@ void flag5_thread_entry( void *p_arg )
 
     while(1)
     {
+        gs_thread_delay(500);
 //        printf("flag5: µÈ´ý»¥³âËø...\n");
 //        mutex_take = gs_mutex_take(mutex, -1);
 //        if (mutex_take == GS_EOK)
@@ -229,6 +230,7 @@ void flag6_thread_entry( void *p_arg )
 //        }
 
 //        gs_thread_delay(100);
+    gs_thread_delay(500);
     }
 }
 
@@ -248,6 +250,7 @@ void flag4_thread_entry( void *p_arg )
 //            sem= gs_sem_create("GS_SEM",1,GS_IPC_FLAG_FIFO);
 //        }
 //        gs_thread_delay(500);
+       gs_thread_delay(500); 
     }
 }
 

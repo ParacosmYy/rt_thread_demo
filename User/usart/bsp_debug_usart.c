@@ -16,7 +16,10 @@
   */ 
   
 #include "./usart/bsp_debug_usart.h"
+#include "E:\Embedded_system\Project_rtos\类rt_thread\gs_thread\gsthread\components\ringbuffer.h"
+#include "gsthread.h"
 
+extern struct gs_ringbuffer shell_ringbuffer;
 
  /**
   * @brief  配置嵌套向量中断控制器NVIC
@@ -96,10 +99,10 @@ void Debug_USART_Config(void)
   USART_Init(DEBUG_USART, &USART_InitStructure); 
 	
   /* 嵌套向量中断控制器NVIC配置 */
-	NVIC_Configuration();
+  NVIC_Configuration();
   
 	/* 使能串口接收中断 */
-	USART_ITConfig(DEBUG_USART, USART_IT_RXNE, ENABLE);
+  USART_ITConfig(DEBUG_USART, USART_IT_RXNE, ENABLE);
 	
   /* 使能串口 */
   USART_Cmd(DEBUG_USART, ENABLE);
@@ -169,4 +172,21 @@ int fgetc(FILE *f)
 
 		return (int)USART_ReceiveData(DEBUG_USART);
 }
+
+void USART1_IRQHandler(void)                	//串口1中断服务程序
+{
+	uint8_t Res;
+
+	if(USART_GetITStatus(USART1, USART_IT_RXNE) != RESET)  
+	{
+			Res =USART_ReceiveData(USART1);	//读取接收到的数据
+			gs_ringbuffer_putchar(&shell_ringbuffer,Res);
+            USART_SendData(USART1,Res);
+	}
+		
+} 
+
+
+
+
 /*********************************************END OF FILE**********************/

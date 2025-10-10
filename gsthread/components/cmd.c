@@ -53,7 +53,10 @@ void cmd_ps(void * parameter)
 
 void cmd_help(void * parameter)
 {
-    ;
+        printf("ps              	-List threads in the system\r\n");
+		printf("version         	-show GS-Thread version information\r\n");
+		printf("clear         		-clear the terminal screen\r\n");
+		printf("reboot         		-Reboot System\r\n");
 }
 
 void cmd_reboot(void * parameter)

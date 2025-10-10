@@ -36,3 +36,10 @@
 ..\..\output\bsp_debug_usart.o: ..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dcmi.h
 ..\..\output\bsp_debug_usart.o: ..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_fsmc.h
 ..\..\output\bsp_debug_usart.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdio.h
+..\..\output\bsp_debug_usart.o: E:\Embedded_system\Project_rtos\类rt_thread\gs_thread\gsthread\components\ringbuffer.h
+..\..\output\bsp_debug_usart.o: ..\..\gsthread\include\gsthread.h
+..\..\output\bsp_debug_usart.o: ..\..\gsthread\include\gsdef.h
+..\..\output\bsp_debug_usart.o: ..\..\User\gsconfig.h
+..\..\output\bsp_debug_usart.o: ..\..\gsthread\include\gsservice.h
+..\..\output\bsp_debug_usart.o: ..\..\gsthread\include\list.h
+..\..\output\bsp_debug_usart.o: ..\..\User\./led/bsp_led.h

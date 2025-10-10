@@ -44,3 +44,4 @@
 ..\..\output\shell.o: D:\keil5\ARM\ARMCC\Bin\..\include\string.h
 ..\..\output\shell.o: ..\..\gsthread\components\shell.h
 ..\..\output\shell.o: ..\..\gsthread\components\cmd.h
+..\..\output\shell.o: ..\..\gsthread\components\ringbuffer.h

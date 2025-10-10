@@ -56,6 +56,7 @@
 "..\..\output\ipc.o"
 "..\..\output\shell.o"
 "..\..\output\cmd.o"
+"..\..\output\ringbuffer.o"
 "..\..\output\bsp_led.o"
 "..\..\output\bsp_key.o"
 --library_type=microlib --strict --scatter "..\..\Output\Template.sct"

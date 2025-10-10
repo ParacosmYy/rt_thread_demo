@@ -9,6 +9,8 @@
         "stm32f4xx.h": "c",
         "gshw.h": "c",
         "list.h": "c",
-        "bsp_key.h": "c"
+        "bsp_key.h": "c",
+        "cmd.h": "c",
+        "stdio.h": "c"
     }
 }

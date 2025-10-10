@@ -930,6 +930,16 @@
               <FileType>5</FileType>
               <FilePath>..\..\gsthread\components\cmd.h</FilePath>
             </File>
+            <File>
+              <FileName>ringbuffer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\gsthread\components\ringbuffer.c</FilePath>
+            </File>
+            <File>
+              <FileName>ringbuffer.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\gsthread\components\ringbuffer.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

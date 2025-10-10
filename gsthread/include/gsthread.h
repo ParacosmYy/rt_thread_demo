@@ -75,7 +75,9 @@ void gs_hw_interrupt_enable(gs_base_t level);
 
 char * gs_strncpy(char *des , const char *src , gs_ubase_t n);
 int __gs_ffs(int value);
-
+int gs_strlen(char *src);
+int gs_strcmp(char * src1 , char * src2);
+void * gs_memmove(void *dest , const void* src , gs_ubase_t n);
 //-------------------------内核初始化接口-----------------------------
 
 struct gs_object_information * gs_object_get_infomation(enum gs_object_class_type type);
@@ -104,6 +106,7 @@ gs_err_t gs_mutex_delete(gs_mutex_t mutex);
 gs_err_t gs_mutex_take(gs_mutex_t mutex, gs_int32_t time);
 gs_err_t gs_mutex_release(gs_mutex_t mutex);
 //------------------------shell相关接口----------------------------------
-void show_version(void);                                       
+void show_version(void);
+void gs_shell_init();                                       
 #endif 
 
