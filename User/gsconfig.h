@@ -6,7 +6,7 @@
 #define GS_THREAD_NUM_MAX       100
 #define GS_ALIGN_SIZE           4      /* 多少个字节对齐 */ 
 
-#define GS_NAME_MAX	            8      /* 内核对象的名字长度，字符串形式 */
+#define GS_NAME_MAX	            15      /* 内核对象的名字长度，字符串形式 */
 
 #define GS_TICK_PER_SECOND	    1000
 

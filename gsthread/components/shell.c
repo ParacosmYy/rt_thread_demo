@@ -20,44 +20,54 @@ struct gs_shell *shell = &my_shell;
 char cmd_buffer[GS_SHELL_LENGSH];
 int cmd_index = 0;
 
-void receive_char(char ch)
-{
-    ch = shell_getchar();
-    if(ch==0XFF)
-	{
-		continue; // 0XFF表示串口接收没有任何消息中断，跳过
-	}
-    if(ch == '\r' || ch == '\n')
-    {
-        if(cmd_index > 0)
-        {
-            cmd_buffer[cmd_index - 1] = '\0';
-            cmd_index = 0;
-            shell_match(cmd_buffer , cmd_index - 1);
-        }
-        else
-        {
-            cmd_buffer[cmd_index++] = ch;
-            if(cmd_index >= GS_SHELL_LENGSH)
-            {
-                cmd_index = 0;//防止溢出
-            }
-        }
-    }
-}
+
 
 char shell_getchar()
 {
     char ch ;
     if(!gs_ringbuffer_isempty(&shell_ringbuffer))
     {
-        gs_ringbuffer_getchar(&shell_ringbuffer , (gs_uint8_t*)ch); //串口接受中断获取的字符存入ringbuffer，再取出ch
+        gs_ringbuffer_getchar(&shell_ringbuffer , (gs_uint8_t*)&ch); //串口接受中断获取的字符存入ringbuffer，再取出ch
+        return ch;
     }
     else
     {
         gs_thread_delay_ms(10);
+        return 0xFF; // 没有数据时返回0xFF
     }
-    return ch;
+    
+}
+
+void receive_char(int ch)
+{
+     while(1)
+    {
+        ch = shell_getchar();
+        if(ch==0XFF)
+        {
+            continue; // 0XFF表示串口接收没有任何消息中断，跳过
+        }
+        if(ch == '\r' || ch == '\n')
+        {
+                if(cmd_index > 0)
+            {
+                cmd_buffer[cmd_index] = '\0'; // 末尾加结束符
+                shell_match(cmd_buffer, cmd_index); // 用实际长度
+                cmd_index = 0; // 最后清零
+            }
+           // printf("gs />");
+        }
+        else
+        {
+            cmd_buffer[cmd_index++] = ch;
+            printf("receive ch : %c \r\n" , ch);
+            if(cmd_index >= GS_SHELL_LENGSH)
+            {
+                cmd_index = 0; // 防止溢出
+            }
+        }
+    } 
+    
 }
 
 void gs_thread_shell_entry(void * parameter)
@@ -67,10 +77,8 @@ void gs_thread_shell_entry(void * parameter)
     shell->current_history = 0;
     shell->history_cnt = 0;
     printf("gs />");
-    while(1)
-    {
-        
-    } 
+    receive_char(ch);
+   
 }
 
 void shell_match(char * cmd , gs_size_t length)
@@ -80,14 +88,16 @@ void shell_match(char * cmd , gs_size_t length)
     {
         if(length == cmd_table[i].cmd_length)
         {
-            if(gs_strcmp(cmd , cmd_table[i].name))
+            if(gs_strcmp(cmd , cmd_table[i].name) == 0)
             {
                 cmd_table[i].entry(cmd_table[i].parameter);
-                printf("gs /> cmd:%s over",cmd_table[i].name);
+                printf("gs /> cmd : %s over \r\n",cmd);
+                printf("gs /> ");
                 return ;
             }
         }
     }
+        printf("match cmd: %s, len: %d\r\n", cmd, length);
         printf("cmd not found!");
 		printf("\r\n");
 		printf("gs />");

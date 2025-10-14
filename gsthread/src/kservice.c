@@ -108,7 +108,7 @@ void * gs_memmove(void *dest , const void* src , gs_ubase_t n) //ÏÈ±È½ÏdºÍsµÄÎ»Ö
 
 void show_version(void)
 {
-		
+		printf("\r\n");
 		printf("--------------------\r\n");
 		printf("|      welcome     |\r\n");
 		printf("|     GS-thread    |\r\n");

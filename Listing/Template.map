@@ -416,8 +416,13 @@ Section Cross References
     shell.o(i.gs_shell_init) refers to shell.o(.bss) for .bss
     shell.o(i.gs_shell_init) refers to shell.o(i.gs_thread_shell_entry) for gs_thread_shell_entry
     shell.o(i.gs_thread_shell_entry) refers to printf6.o(i.__0printf$6) for __2printf
-    shell.o(i.gs_thread_shell_entry) refers to shell.o(i.shell_getchar) for shell_getchar
+    shell.o(i.gs_thread_shell_entry) refers to shell.o(i.receive_char) for receive_char
     shell.o(i.gs_thread_shell_entry) refers to shell.o(.data) for .data
+    shell.o(i.receive_char) refers to printf6.o(i.__0printf$6) for __2printf
+    shell.o(i.receive_char) refers to shell.o(i.shell_getchar) for shell_getchar
+    shell.o(i.receive_char) refers to shell.o(i.shell_match) for shell_match
+    shell.o(i.receive_char) refers to shell.o(.bss) for .bss
+    shell.o(i.receive_char) refers to shell.o(.data) for .data
     shell.o(i.shell_getchar) refers to ringbuffer.o(i.gs_ringbuffer_isempty) for gs_ringbuffer_isempty
     shell.o(i.shell_getchar) refers to thread.o(i.gs_thread_delay_ms) for gs_thread_delay_ms
     shell.o(i.shell_getchar) refers to ringbuffer.o(i.gs_ringbuffer_getchar) for gs_ringbuffer_getchar
@@ -1505,7 +1510,6 @@ Removing Unused input sections from the image.
     Removing kservice.o(.revsh_text), (4 bytes).
     Removing kservice.o(.rrx_text), (6 bytes).
     Removing kservice.o(i.gs_memmove), (52 bytes).
-    Removing kservice.o(i.gs_strcmp), (52 bytes).
     Removing kservice.o(i.gs_strlen), (16 bytes).
     Removing object.o(.rev16_text), (4 bytes).
     Removing object.o(.revsh_text), (4 bytes).
@@ -1542,7 +1546,6 @@ Removing Unused input sections from the image.
     Removing shell.o(.rev16_text), (4 bytes).
     Removing shell.o(.revsh_text), (4 bytes).
     Removing shell.o(.rrx_text), (6 bytes).
-    Removing shell.o(i.shell_match), (128 bytes).
     Removing cmd.o(.rev16_text), (4 bytes).
     Removing cmd.o(.revsh_text), (4 bytes).
     Removing cmd.o(.rrx_text), (6 bytes).
@@ -1564,7 +1567,7 @@ Removing Unused input sections from the image.
     Removing cdrcmple.o(.text), (48 bytes).
     Removing depilogue.o(.text), (186 bytes).
 
-851 unused section(s) (total 30992 bytes) removed from the image.
+849 unused section(s) (total 30812 bytes) removed from the image.
 
 ==============================================================================
 
@@ -1574,34 +1577,34 @@ Image Symbol Table
 
     Symbol Name                              Value     Ov Type        Size  Object(Section)
 
-    ../clib/microlib/division.c              0x00000000   Number         0  uidiv.o ABSOLUTE
     ../clib/microlib/division.c              0x00000000   Number         0  uldiv.o ABSOLUTE
+    ../clib/microlib/division.c              0x00000000   Number         0  uidiv.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8b.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7b.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry5.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry2.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10b.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7b.o ABSOLUTE
-    ../clib/microlib/longlong.c              0x00000000   Number         0  llshl.o ABSOLUTE
-    ../clib/microlib/longlong.c              0x00000000   Number         0  llushr.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry2.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry5.o ABSOLUTE
     ../clib/microlib/longlong.c              0x00000000   Number         0  llsshr.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printfb.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf0.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf1.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf3.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf7.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printfa.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf8.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf2.o ABSOLUTE
+    ../clib/microlib/longlong.c              0x00000000   Number         0  llushr.o ABSOLUTE
+    ../clib/microlib/longlong.c              0x00000000   Number         0  llshl.o ABSOLUTE
     ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf6.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf7.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf8.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf1.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf0.o ABSOLUTE
     ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf5.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printfb.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printfa.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf2.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf3.o ABSOLUTE
     ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf4.o ABSOLUTE
     ../clib/microlib/printf/stubs.s          0x00000000   Number         0  stubs.o ABSOLUTE
     ../clib/microlib/stdio/streams.c         0x00000000   Number         0  stdout.o ABSOLUTE
@@ -1798,66 +1801,69 @@ Image Symbol Table
     i._printf_pre_padding                    0x08000cb8   Section        0  printf6.o(i._printf_pre_padding)
     _printf_pre_padding                      0x08000cb9   Thumb Code    46  printf6.o(i._printf_pre_padding)
     i.cmd_clear                              0x08000ce8   Section        0  cmd.o(i.cmd_clear)
-    i.cmd_help                               0x08000d94   Section        0  cmd.o(i.cmd_help)
-    i.cmd_list_add                           0x08000e70   Section        0  shell.o(i.cmd_list_add)
-    i.cmd_ps                                 0x08000eac   Section        0  cmd.o(i.cmd_ps)
-    i.cmd_reboot                             0x08000f90   Section        0  cmd.o(i.cmd_reboot)
-    i.cmd_version                            0x08000f92   Section        0  cmd.o(i.cmd_version)
-    i.flag1_thread_entry                     0x08000f98   Section        0  main.o(i.flag1_thread_entry)
-    i.flag2_thread_entry                     0x08000fb4   Section        0  main.o(i.flag2_thread_entry)
-    i.flag3_thread_entry                     0x08000fd0   Section        0  main.o(i.flag3_thread_entry)
-    i.flag4_thread_entry                     0x08000fec   Section        0  main.o(i.flag4_thread_entry)
-    i.flag5_thread_entry                     0x08000ff8   Section        0  main.o(i.flag5_thread_entry)
-    i.flag6_thread_entry                     0x08001004   Section        0  main.o(i.flag6_thread_entry)
-    i.fputc                                  0x08001010   Section        0  bsp_debug_usart.o(i.fputc)
-    i.gs_hw_stack_init                       0x08001034   Section        0  cpuport.o(i.gs_hw_stack_init)
-    i.gs_interrupt_enter                     0x08001070   Section        0  irq.o(i.gs_interrupt_enter)
-    i.gs_interrupt_leave                     0x0800108c   Section        0  irq.o(i.gs_interrupt_leave)
-    i.gs_list_insert_after                   0x080010a8   Section        0  timer.o(i.gs_list_insert_after)
-    gs_list_insert_after                     0x080010a9   Thumb Code    14  timer.o(i.gs_list_insert_after)
-    i.gs_list_remove                         0x080010b6   Section        0  thread.o(i.gs_list_remove)
-    gs_list_remove                           0x080010b7   Thumb Code    18  thread.o(i.gs_list_remove)
-    i.gs_mutex_create                        0x080010c8   Section        0  ipc.o(i.gs_mutex_create)
-    i.gs_object_get_infomation               0x08001110   Section        0  object.o(i.gs_object_get_infomation)
-    i.gs_object_init                         0x08001134   Section        0  object.o(i.gs_object_init)
-    i.gs_ringbuffer_getchar                  0x08001172   Section        0  ringbuffer.o(i.gs_ringbuffer_getchar)
-    i.gs_ringbuffer_init                     0x080011a4   Section        0  ringbuffer.o(i.gs_ringbuffer_init)
-    i.gs_ringbuffer_isempty                  0x080011c4   Section        0  ringbuffer.o(i.gs_ringbuffer_isempty)
-    i.gs_ringbuffer_putchar                  0x080011d8   Section        0  ringbuffer.o(i.gs_ringbuffer_putchar)
-    i.gs_schedule                            0x08001208   Section        0  scheduler.o(i.gs_schedule)
-    i.gs_schedule_insert_thread              0x08001254   Section        0  scheduler.o(i.gs_schedule_insert_thread)
-    i.gs_schedule_remove_thread              0x08001298   Section        0  scheduler.o(i.gs_schedule_remove_thread)
-    i.gs_sem_create                          0x080012ec   Section        0  ipc.o(i.gs_sem_create)
-    i.gs_shell_init                          0x0800132c   Section        0  shell.o(i.gs_shell_init)
-    i.gs_strncpy                             0x0800139c   Section        0  kservice.o(i.gs_strncpy)
-    i.gs_system_scheduler_init               0x080013c4   Section        0  scheduler.o(i.gs_system_scheduler_init)
-    i.gs_system_scheduler_start              0x080013ec   Section        0  scheduler.o(i.gs_system_scheduler_start)
-    i.gs_system_timer_init                   0x08001414   Section        0  timer.o(i.gs_system_timer_init)
-    i.gs_thread_all_init                     0x0800142c   Section        0  components.o(i.gs_thread_all_init)
-    i.gs_thread_delay                        0x08001488   Section        0  thread.o(i.gs_thread_delay)
-    i.gs_thread_delay_ms                     0x0800148c   Section        0  thread.o(i.gs_thread_delay_ms)
-    i.gs_thread_idle_entry                   0x08001490   Section        0  idle.o(i.gs_thread_idle_entry)
-    i.gs_thread_idle_init                    0x080014a0   Section        0  idle.o(i.gs_thread_idle_init)
-    i.gs_thread_init                         0x080014e0   Section        0  thread.o(i.gs_thread_init)
-    i.gs_thread_resume                       0x0800156c   Section        0  thread.o(i.gs_thread_resume)
-    i.gs_thread_self                         0x080015a0   Section        0  thread.o(i.gs_thread_self)
-    i.gs_thread_shell_entry                  0x080015ac   Section        0  shell.o(i.gs_thread_shell_entry)
-    i.gs_thread_sleep                        0x080015e8   Section        0  thread.o(i.gs_thread_sleep)
-    i.gs_thread_startup                      0x08001620   Section        0  thread.o(i.gs_thread_startup)
-    i.gs_thread_suspend                      0x08001646   Section        0  thread.o(i.gs_thread_suspend)
-    i.gs_thread_timeout                      0x08001680   Section        0  thread.o(i.gs_thread_timeout)
-    i.gs_thread_yield                        0x080016a0   Section        0  thread.o(i.gs_thread_yield)
-    i.gs_tick_get                            0x08001700   Section        0  clock.o(i.gs_tick_get)
-    i.gs_tick_increase                       0x0800170c   Section        0  clock.o(i.gs_tick_increase)
-    i.gs_timer_check                         0x08001738   Section        0  timer.o(i.gs_timer_check)
-    i.gs_timer_control                       0x080017a8   Section        0  timer.o(i.gs_timer_control)
-    i.gs_timer_init                          0x080017dc   Section        0  timer.o(i.gs_timer_init)
-    i.gs_timer_start                         0x08001808   Section        0  timer.o(i.gs_timer_start)
-    i.gs_timer_stop                          0x080018dc   Section        0  timer.o(i.gs_timer_stop)
-    i.main                                   0x0800190c   Section        0  main.o(i.main)
-    i.shell_getchar                          0x08001a7c   Section        0  shell.o(i.shell_getchar)
-    i.show_version                           0x08001aa0   Section        0  kservice.o(i.show_version)
-    i.system_cmd_init                        0x08001b4c   Section        0  shell.o(i.system_cmd_init)
+    i.cmd_help                               0x08000da4   Section        0  cmd.o(i.cmd_help)
+    i.cmd_list_add                           0x08000e80   Section        0  shell.o(i.cmd_list_add)
+    i.cmd_ps                                 0x08000ebc   Section        0  cmd.o(i.cmd_ps)
+    i.cmd_reboot                             0x08000fac   Section        0  cmd.o(i.cmd_reboot)
+    i.cmd_version                            0x08000fd0   Section        0  cmd.o(i.cmd_version)
+    i.flag1_thread_entry                     0x08000fd4   Section        0  main.o(i.flag1_thread_entry)
+    i.flag2_thread_entry                     0x08000ff0   Section        0  main.o(i.flag2_thread_entry)
+    i.flag3_thread_entry                     0x0800100c   Section        0  main.o(i.flag3_thread_entry)
+    i.flag4_thread_entry                     0x08001028   Section        0  main.o(i.flag4_thread_entry)
+    i.flag5_thread_entry                     0x08001034   Section        0  main.o(i.flag5_thread_entry)
+    i.flag6_thread_entry                     0x08001040   Section        0  main.o(i.flag6_thread_entry)
+    i.fputc                                  0x0800104c   Section        0  bsp_debug_usart.o(i.fputc)
+    i.gs_hw_stack_init                       0x08001070   Section        0  cpuport.o(i.gs_hw_stack_init)
+    i.gs_interrupt_enter                     0x080010ac   Section        0  irq.o(i.gs_interrupt_enter)
+    i.gs_interrupt_leave                     0x080010c8   Section        0  irq.o(i.gs_interrupt_leave)
+    i.gs_list_insert_after                   0x080010e4   Section        0  timer.o(i.gs_list_insert_after)
+    gs_list_insert_after                     0x080010e5   Thumb Code    14  timer.o(i.gs_list_insert_after)
+    i.gs_list_remove                         0x080010f2   Section        0  thread.o(i.gs_list_remove)
+    gs_list_remove                           0x080010f3   Thumb Code    18  thread.o(i.gs_list_remove)
+    i.gs_mutex_create                        0x08001104   Section        0  ipc.o(i.gs_mutex_create)
+    i.gs_object_get_infomation               0x08001148   Section        0  object.o(i.gs_object_get_infomation)
+    i.gs_object_init                         0x0800116c   Section        0  object.o(i.gs_object_init)
+    i.gs_ringbuffer_getchar                  0x080011aa   Section        0  ringbuffer.o(i.gs_ringbuffer_getchar)
+    i.gs_ringbuffer_init                     0x080011dc   Section        0  ringbuffer.o(i.gs_ringbuffer_init)
+    i.gs_ringbuffer_isempty                  0x080011fc   Section        0  ringbuffer.o(i.gs_ringbuffer_isempty)
+    i.gs_ringbuffer_putchar                  0x08001210   Section        0  ringbuffer.o(i.gs_ringbuffer_putchar)
+    i.gs_schedule                            0x08001240   Section        0  scheduler.o(i.gs_schedule)
+    i.gs_schedule_insert_thread              0x0800128c   Section        0  scheduler.o(i.gs_schedule_insert_thread)
+    i.gs_schedule_remove_thread              0x080012d0   Section        0  scheduler.o(i.gs_schedule_remove_thread)
+    i.gs_sem_create                          0x08001324   Section        0  ipc.o(i.gs_sem_create)
+    i.gs_shell_init                          0x08001364   Section        0  shell.o(i.gs_shell_init)
+    i.gs_strcmp                              0x080013d4   Section        0  kservice.o(i.gs_strcmp)
+    i.gs_strncpy                             0x08001408   Section        0  kservice.o(i.gs_strncpy)
+    i.gs_system_scheduler_init               0x08001430   Section        0  scheduler.o(i.gs_system_scheduler_init)
+    i.gs_system_scheduler_start              0x08001458   Section        0  scheduler.o(i.gs_system_scheduler_start)
+    i.gs_system_timer_init                   0x08001480   Section        0  timer.o(i.gs_system_timer_init)
+    i.gs_thread_all_init                     0x08001498   Section        0  components.o(i.gs_thread_all_init)
+    i.gs_thread_delay                        0x080014f4   Section        0  thread.o(i.gs_thread_delay)
+    i.gs_thread_delay_ms                     0x080014f8   Section        0  thread.o(i.gs_thread_delay_ms)
+    i.gs_thread_idle_entry                   0x080014fc   Section        0  idle.o(i.gs_thread_idle_entry)
+    i.gs_thread_idle_init                    0x0800150c   Section        0  idle.o(i.gs_thread_idle_init)
+    i.gs_thread_init                         0x0800154c   Section        0  thread.o(i.gs_thread_init)
+    i.gs_thread_resume                       0x080015d8   Section        0  thread.o(i.gs_thread_resume)
+    i.gs_thread_self                         0x0800160c   Section        0  thread.o(i.gs_thread_self)
+    i.gs_thread_shell_entry                  0x08001618   Section        0  shell.o(i.gs_thread_shell_entry)
+    i.gs_thread_sleep                        0x0800163c   Section        0  thread.o(i.gs_thread_sleep)
+    i.gs_thread_startup                      0x08001674   Section        0  thread.o(i.gs_thread_startup)
+    i.gs_thread_suspend                      0x0800169a   Section        0  thread.o(i.gs_thread_suspend)
+    i.gs_thread_timeout                      0x080016d4   Section        0  thread.o(i.gs_thread_timeout)
+    i.gs_thread_yield                        0x080016f4   Section        0  thread.o(i.gs_thread_yield)
+    i.gs_tick_get                            0x08001754   Section        0  clock.o(i.gs_tick_get)
+    i.gs_tick_increase                       0x08001760   Section        0  clock.o(i.gs_tick_increase)
+    i.gs_timer_check                         0x0800178c   Section        0  timer.o(i.gs_timer_check)
+    i.gs_timer_control                       0x080017fc   Section        0  timer.o(i.gs_timer_control)
+    i.gs_timer_init                          0x08001830   Section        0  timer.o(i.gs_timer_init)
+    i.gs_timer_start                         0x0800185c   Section        0  timer.o(i.gs_timer_start)
+    i.gs_timer_stop                          0x08001930   Section        0  timer.o(i.gs_timer_stop)
+    i.main                                   0x08001960   Section        0  main.o(i.main)
+    i.receive_char                           0x08001ad0   Section        0  shell.o(i.receive_char)
+    i.shell_getchar                          0x08001b30   Section        0  shell.o(i.shell_getchar)
+    i.shell_match                            0x08001b58   Section        0  shell.o(i.shell_match)
+    i.show_version                           0x08001c24   Section        0  kservice.o(i.show_version)
+    i.system_cmd_init                        0x08001cd8   Section        0  shell.o(i.system_cmd_init)
     .data                                    0x20000000   Section       20  system_stm32f4xx.o(.data)
     .data                                    0x20000014   Section       16  stm32f4xx_rcc.o(.data)
     APBAHBPrescTable                         0x20000014   Data          16  stm32f4xx_rcc.o(.data)
@@ -1878,18 +1884,18 @@ Image Symbol Table
     random_nr                                0x20000090   Data           4  timer.o(.data)
     gs_timer_list                            0x20000094   Data           8  timer.o(.data)
     .data                                    0x2000009c   Section        8  ipc.o(.data)
-    .data                                    0x200000a4   Section        8  shell.o(.data)
-    .data                                    0x200000ac   Section        4  cmd.o(.data)
-    .data                                    0x200000b0   Section        4  stdout.o(.data)
-    .bss                                     0x200000b4   Section     1464  main.o(.bss)
-    .bss                                     0x2000066c   Section      628  idle.o(.bss)
-    gs_thread_stack                          0x2000066c   Data         512  idle.o(.bss)
-    .bss                                     0x200008e0   Section      256  scheduler.o(.bss)
-    .bss                                     0x200009e0   Section     2600  ipc.o(.bss)
-    .bss                                     0x20001408   Section     4528  shell.o(.bss)
-    .bss                                     0x200025b8   Section      188  shell.o(.bss)
-    .bss                                     0x20002674   Section      400  cmd.o(.bss)
-    STACK                                    0x20002808   Section     1024  startup_stm32f40xx.o(STACK)
+    .data                                    0x200000a4   Section       12  shell.o(.data)
+    .data                                    0x200000b0   Section        4  cmd.o(.data)
+    .data                                    0x200000b4   Section        4  stdout.o(.data)
+    .bss                                     0x200000b8   Section     1560  main.o(.bss)
+    .bss                                     0x200006d0   Section      644  idle.o(.bss)
+    gs_thread_stack                          0x200006d0   Data         512  idle.o(.bss)
+    .bss                                     0x20000954   Section      256  scheduler.o(.bss)
+    .bss                                     0x20000a54   Section     3000  ipc.o(.bss)
+    .bss                                     0x2000160c   Section     4594  shell.o(.bss)
+    .bss                                     0x20002800   Section      188  shell.o(.bss)
+    .bss                                     0x200028bc   Section      400  cmd.o(.bss)
+    STACK                                    0x20002a50   Section     1024  startup_stm32f40xx.o(STACK)
 
     Global Symbols
 
@@ -2081,65 +2087,68 @@ Image Symbol Table
     __scatterload_copy                       0x0800093d   Thumb Code    14  handlers.o(i.__scatterload_copy)
     __scatterload_null                       0x0800094b   Thumb Code     2  handlers.o(i.__scatterload_null)
     __scatterload_zeroinit                   0x0800094d   Thumb Code    14  handlers.o(i.__scatterload_zeroinit)
-    cmd_clear                                0x08000ce9   Thumb Code   126  cmd.o(i.cmd_clear)
-    cmd_help                                 0x08000d95   Thumb Code    30  cmd.o(i.cmd_help)
-    cmd_list_add                             0x08000e71   Thumb Code    52  shell.o(i.cmd_list_add)
-    cmd_ps                                   0x08000ead   Thumb Code   112  cmd.o(i.cmd_ps)
-    cmd_reboot                               0x08000f91   Thumb Code     2  cmd.o(i.cmd_reboot)
-    cmd_version                              0x08000f93   Thumb Code     4  cmd.o(i.cmd_version)
-    flag1_thread_entry                       0x08000f99   Thumb Code    22  main.o(i.flag1_thread_entry)
-    flag2_thread_entry                       0x08000fb5   Thumb Code    22  main.o(i.flag2_thread_entry)
-    flag3_thread_entry                       0x08000fd1   Thumb Code    22  main.o(i.flag3_thread_entry)
-    flag4_thread_entry                       0x08000fed   Thumb Code    12  main.o(i.flag4_thread_entry)
-    flag5_thread_entry                       0x08000ff9   Thumb Code    12  main.o(i.flag5_thread_entry)
-    flag6_thread_entry                       0x08001005   Thumb Code    12  main.o(i.flag6_thread_entry)
-    fputc                                    0x08001011   Thumb Code    30  bsp_debug_usart.o(i.fputc)
-    gs_hw_stack_init                         0x08001035   Thumb Code    56  cpuport.o(i.gs_hw_stack_init)
-    gs_interrupt_enter                       0x08001071   Thumb Code    22  irq.o(i.gs_interrupt_enter)
-    gs_interrupt_leave                       0x0800108d   Thumb Code    22  irq.o(i.gs_interrupt_leave)
-    gs_mutex_create                          0x080010c9   Thumb Code    62  ipc.o(i.gs_mutex_create)
-    gs_object_get_infomation                 0x08001111   Thumb Code    30  object.o(i.gs_object_get_infomation)
-    gs_object_init                           0x08001135   Thumb Code    62  object.o(i.gs_object_init)
-    gs_ringbuffer_getchar                    0x08001173   Thumb Code    50  ringbuffer.o(i.gs_ringbuffer_getchar)
-    gs_ringbuffer_init                       0x080011a5   Thumb Code    32  ringbuffer.o(i.gs_ringbuffer_init)
-    gs_ringbuffer_isempty                    0x080011c5   Thumb Code    20  ringbuffer.o(i.gs_ringbuffer_isempty)
-    gs_ringbuffer_putchar                    0x080011d9   Thumb Code    48  ringbuffer.o(i.gs_ringbuffer_putchar)
-    gs_schedule                              0x08001209   Thumb Code    66  scheduler.o(i.gs_schedule)
-    gs_schedule_insert_thread                0x08001255   Thumb Code    58  scheduler.o(i.gs_schedule_insert_thread)
-    gs_schedule_remove_thread                0x08001299   Thumb Code    74  scheduler.o(i.gs_schedule_remove_thread)
-    gs_sem_create                            0x080012ed   Thumb Code    56  ipc.o(i.gs_sem_create)
-    gs_shell_init                            0x0800132d   Thumb Code    68  shell.o(i.gs_shell_init)
-    gs_strncpy                               0x0800139d   Thumb Code    38  kservice.o(i.gs_strncpy)
-    gs_system_scheduler_init                 0x080013c5   Thumb Code    32  scheduler.o(i.gs_system_scheduler_init)
-    gs_system_scheduler_start                0x080013ed   Thumb Code    32  scheduler.o(i.gs_system_scheduler_start)
-    gs_system_timer_init                     0x08001415   Thumb Code    20  timer.o(i.gs_system_timer_init)
-    gs_thread_all_init                       0x0800142d   Thumb Code    82  components.o(i.gs_thread_all_init)
-    gs_thread_delay                          0x08001489   Thumb Code     4  thread.o(i.gs_thread_delay)
-    gs_thread_delay_ms                       0x0800148d   Thumb Code     4  thread.o(i.gs_thread_delay_ms)
-    gs_thread_idle_entry                     0x08001491   Thumb Code    10  idle.o(i.gs_thread_idle_entry)
-    gs_thread_idle_init                      0x080014a1   Thumb Code    42  idle.o(i.gs_thread_idle_init)
-    gs_thread_init                           0x080014e1   Thumb Code   126  thread.o(i.gs_thread_init)
-    gs_thread_resume                         0x0800156d   Thumb Code    52  thread.o(i.gs_thread_resume)
-    gs_thread_self                           0x080015a1   Thumb Code     6  thread.o(i.gs_thread_self)
-    gs_thread_shell_entry                    0x080015ad   Thumb Code    40  shell.o(i.gs_thread_shell_entry)
-    gs_thread_sleep                          0x080015e9   Thumb Code    52  thread.o(i.gs_thread_sleep)
-    gs_thread_startup                        0x08001621   Thumb Code    38  thread.o(i.gs_thread_startup)
-    gs_thread_suspend                        0x08001647   Thumb Code    58  thread.o(i.gs_thread_suspend)
-    gs_thread_timeout                        0x08001681   Thumb Code    32  thread.o(i.gs_thread_timeout)
-    gs_thread_yield                          0x080016a1   Thumb Code    88  thread.o(i.gs_thread_yield)
-    gs_tick_get                              0x08001701   Thumb Code     6  clock.o(i.gs_tick_get)
-    gs_tick_increase                         0x0800170d   Thumb Code    38  clock.o(i.gs_tick_increase)
-    gs_timer_check                           0x08001739   Thumb Code   106  timer.o(i.gs_timer_check)
-    gs_timer_control                         0x080017a9   Thumb Code    52  timer.o(i.gs_timer_control)
-    gs_timer_init                            0x080017dd   Thumb Code    42  timer.o(i.gs_timer_init)
-    gs_timer_start                           0x08001809   Thumb Code   206  timer.o(i.gs_timer_start)
-    gs_timer_stop                            0x080018dd   Thumb Code    46  timer.o(i.gs_timer_stop)
-    main                                     0x0800190d   Thumb Code   238  main.o(i.main)
-    shell_getchar                            0x08001a7d   Thumb Code    30  shell.o(i.shell_getchar)
-    show_version                             0x08001aa1   Thumb Code    42  kservice.o(i.show_version)
-    system_cmd_init                          0x08001b4d   Thumb Code    66  shell.o(i.system_cmd_init)
-    Region$$Table$$Base                      0x08001bc8   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x08001be8   Number         0  anon$$obj.o(Region$$Table)
+    cmd_clear                                0x08000ce9   Thumb Code   144  cmd.o(i.cmd_clear)
+    cmd_help                                 0x08000da5   Thumb Code    30  cmd.o(i.cmd_help)
+    cmd_list_add                             0x08000e81   Thumb Code    52  shell.o(i.cmd_list_add)
+    cmd_ps                                   0x08000ebd   Thumb Code   112  cmd.o(i.cmd_ps)
+    cmd_reboot                               0x08000fad   Thumb Code    26  cmd.o(i.cmd_reboot)
+    cmd_version                              0x08000fd1   Thumb Code     4  cmd.o(i.cmd_version)
+    flag1_thread_entry                       0x08000fd5   Thumb Code    22  main.o(i.flag1_thread_entry)
+    flag2_thread_entry                       0x08000ff1   Thumb Code    22  main.o(i.flag2_thread_entry)
+    flag3_thread_entry                       0x0800100d   Thumb Code    22  main.o(i.flag3_thread_entry)
+    flag4_thread_entry                       0x08001029   Thumb Code    12  main.o(i.flag4_thread_entry)
+    flag5_thread_entry                       0x08001035   Thumb Code    12  main.o(i.flag5_thread_entry)
+    flag6_thread_entry                       0x08001041   Thumb Code    12  main.o(i.flag6_thread_entry)
+    fputc                                    0x0800104d   Thumb Code    30  bsp_debug_usart.o(i.fputc)
+    gs_hw_stack_init                         0x08001071   Thumb Code    56  cpuport.o(i.gs_hw_stack_init)
+    gs_interrupt_enter                       0x080010ad   Thumb Code    22  irq.o(i.gs_interrupt_enter)
+    gs_interrupt_leave                       0x080010c9   Thumb Code    22  irq.o(i.gs_interrupt_leave)
+    gs_mutex_create                          0x08001105   Thumb Code    58  ipc.o(i.gs_mutex_create)
+    gs_object_get_infomation                 0x08001149   Thumb Code    30  object.o(i.gs_object_get_infomation)
+    gs_object_init                           0x0800116d   Thumb Code    62  object.o(i.gs_object_init)
+    gs_ringbuffer_getchar                    0x080011ab   Thumb Code    50  ringbuffer.o(i.gs_ringbuffer_getchar)
+    gs_ringbuffer_init                       0x080011dd   Thumb Code    32  ringbuffer.o(i.gs_ringbuffer_init)
+    gs_ringbuffer_isempty                    0x080011fd   Thumb Code    20  ringbuffer.o(i.gs_ringbuffer_isempty)
+    gs_ringbuffer_putchar                    0x08001211   Thumb Code    48  ringbuffer.o(i.gs_ringbuffer_putchar)
+    gs_schedule                              0x08001241   Thumb Code    66  scheduler.o(i.gs_schedule)
+    gs_schedule_insert_thread                0x0800128d   Thumb Code    58  scheduler.o(i.gs_schedule_insert_thread)
+    gs_schedule_remove_thread                0x080012d1   Thumb Code    74  scheduler.o(i.gs_schedule_remove_thread)
+    gs_sem_create                            0x08001325   Thumb Code    56  ipc.o(i.gs_sem_create)
+    gs_shell_init                            0x08001365   Thumb Code    68  shell.o(i.gs_shell_init)
+    gs_strcmp                                0x080013d5   Thumb Code    52  kservice.o(i.gs_strcmp)
+    gs_strncpy                               0x08001409   Thumb Code    38  kservice.o(i.gs_strncpy)
+    gs_system_scheduler_init                 0x08001431   Thumb Code    32  scheduler.o(i.gs_system_scheduler_init)
+    gs_system_scheduler_start                0x08001459   Thumb Code    32  scheduler.o(i.gs_system_scheduler_start)
+    gs_system_timer_init                     0x08001481   Thumb Code    20  timer.o(i.gs_system_timer_init)
+    gs_thread_all_init                       0x08001499   Thumb Code    82  components.o(i.gs_thread_all_init)
+    gs_thread_delay                          0x080014f5   Thumb Code     4  thread.o(i.gs_thread_delay)
+    gs_thread_delay_ms                       0x080014f9   Thumb Code     4  thread.o(i.gs_thread_delay_ms)
+    gs_thread_idle_entry                     0x080014fd   Thumb Code    10  idle.o(i.gs_thread_idle_entry)
+    gs_thread_idle_init                      0x0800150d   Thumb Code    42  idle.o(i.gs_thread_idle_init)
+    gs_thread_init                           0x0800154d   Thumb Code   126  thread.o(i.gs_thread_init)
+    gs_thread_resume                         0x080015d9   Thumb Code    52  thread.o(i.gs_thread_resume)
+    gs_thread_self                           0x0800160d   Thumb Code     6  thread.o(i.gs_thread_self)
+    gs_thread_shell_entry                    0x08001619   Thumb Code    24  shell.o(i.gs_thread_shell_entry)
+    gs_thread_sleep                          0x0800163d   Thumb Code    52  thread.o(i.gs_thread_sleep)
+    gs_thread_startup                        0x08001675   Thumb Code    38  thread.o(i.gs_thread_startup)
+    gs_thread_suspend                        0x0800169b   Thumb Code    58  thread.o(i.gs_thread_suspend)
+    gs_thread_timeout                        0x080016d5   Thumb Code    32  thread.o(i.gs_thread_timeout)
+    gs_thread_yield                          0x080016f5   Thumb Code    88  thread.o(i.gs_thread_yield)
+    gs_tick_get                              0x08001755   Thumb Code     6  clock.o(i.gs_tick_get)
+    gs_tick_increase                         0x08001761   Thumb Code    38  clock.o(i.gs_tick_increase)
+    gs_timer_check                           0x0800178d   Thumb Code   106  timer.o(i.gs_timer_check)
+    gs_timer_control                         0x080017fd   Thumb Code    52  timer.o(i.gs_timer_control)
+    gs_timer_init                            0x08001831   Thumb Code    42  timer.o(i.gs_timer_init)
+    gs_timer_start                           0x0800185d   Thumb Code   206  timer.o(i.gs_timer_start)
+    gs_timer_stop                            0x08001931   Thumb Code    46  timer.o(i.gs_timer_stop)
+    main                                     0x08001961   Thumb Code   236  main.o(i.main)
+    receive_char                             0x08001ad1   Thumb Code    68  shell.o(i.receive_char)
+    shell_getchar                            0x08001b31   Thumb Code    34  shell.o(i.shell_getchar)
+    shell_match                              0x08001b59   Thumb Code   108  shell.o(i.shell_match)
+    show_version                             0x08001c25   Thumb Code    48  kservice.o(i.show_version)
+    system_cmd_init                          0x08001cd9   Thumb Code    66  shell.o(i.system_cmd_init)
+    Region$$Table$$Base                      0x08001d54   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x08001d74   Number         0  anon$$obj.o(Region$$Table)
     SystemCoreClock                          0x20000000   Data           4  system_stm32f4xx.o(.data)
     AHBPrescTable                            0x20000004   Data          16  system_stm32f4xx.o(.data)
     gs_interrupt_from_thread                 0x2000002c   Data           4  cpuport.o(.data)
@@ -2154,32 +2163,34 @@ Image Symbol Table
     mutex_index                              0x200000a0   Data           4  ipc.o(.data)
     current_cmd_num                          0x200000a4   Data           4  shell.o(.data)
     shell                                    0x200000a8   Data           4  shell.o(.data)
-    thread_cnt                               0x200000ac   Data           4  cmd.o(.data)
-    __stdout                                 0x200000b0   Data           4  stdout.o(.data)
-    gs_thread_flag1                          0x200000b4   Data         116  main.o(.bss)
-    gs_thread_flag2                          0x20000128   Data         116  main.o(.bss)
-    gs_thread_flag3                          0x2000019c   Data         116  main.o(.bss)
-    gs_thread_flag4                          0x20000210   Data         116  main.o(.bss)
-    gs_thread_flag5                          0x20000284   Data         116  main.o(.bss)
-    gs_thread_flag6                          0x200002f8   Data         116  main.o(.bss)
-    gs_flag1_thread_stack                    0x2000036c   Data         128  main.o(.bss)
-    gs_flag2_thread_stack                    0x200003ec   Data         128  main.o(.bss)
-    gs_flag3_thread_stack                    0x2000046c   Data         128  main.o(.bss)
-    gs_flag4_thread_stack                    0x200004ec   Data         128  main.o(.bss)
-    gs_flag5_thread_stack                    0x2000056c   Data         128  main.o(.bss)
-    gs_flag6_thread_stack                    0x200005ec   Data         128  main.o(.bss)
-    idle                                     0x2000086c   Data         116  idle.o(.bss)
-    gs_thread_priority_table                 0x200008e0   Data         256  scheduler.o(.bss)
-    semaphore                                0x200009e0   Data        1200  ipc.o(.bss)
-    mutexs                                   0x20000e90   Data        1400  ipc.o(.bss)
-    cmd_table                                0x20001408   Data        3200  shell.o(.bss)
-    shell_ringbuffer                         0x20002088   Data          12  shell.o(.bss)
-    ringbuffer                               0x20002094   Data         200  shell.o(.bss)
-    gs_shell_thread                          0x2000215c   Data         116  shell.o(.bss)
-    gs_shell_thread_stack                    0x200021d0   Data        1000  shell.o(.bss)
-    my_shell                                 0x200025b8   Data         188  shell.o(.bss)
-    thread_array                             0x20002674   Data         400  cmd.o(.bss)
-    __initial_sp                             0x20002c08   Data           0  startup_stm32f40xx.o(STACK)
+    cmd_index                                0x200000ac   Data           4  shell.o(.data)
+    thread_cnt                               0x200000b0   Data           4  cmd.o(.data)
+    __stdout                                 0x200000b4   Data           4  stdout.o(.data)
+    gs_thread_flag1                          0x200000b8   Data         132  main.o(.bss)
+    gs_thread_flag2                          0x2000013c   Data         132  main.o(.bss)
+    gs_thread_flag3                          0x200001c0   Data         132  main.o(.bss)
+    gs_thread_flag4                          0x20000244   Data         132  main.o(.bss)
+    gs_thread_flag5                          0x200002c8   Data         132  main.o(.bss)
+    gs_thread_flag6                          0x2000034c   Data         132  main.o(.bss)
+    gs_flag1_thread_stack                    0x200003d0   Data         128  main.o(.bss)
+    gs_flag2_thread_stack                    0x20000450   Data         128  main.o(.bss)
+    gs_flag3_thread_stack                    0x200004d0   Data         128  main.o(.bss)
+    gs_flag4_thread_stack                    0x20000550   Data         128  main.o(.bss)
+    gs_flag5_thread_stack                    0x200005d0   Data         128  main.o(.bss)
+    gs_flag6_thread_stack                    0x20000650   Data         128  main.o(.bss)
+    idle                                     0x200008d0   Data         132  idle.o(.bss)
+    gs_thread_priority_table                 0x20000954   Data         256  scheduler.o(.bss)
+    semaphore                                0x20000a54   Data        1400  ipc.o(.bss)
+    mutexs                                   0x20000fcc   Data        1600  ipc.o(.bss)
+    cmd_table                                0x2000160c   Data        3200  shell.o(.bss)
+    shell_ringbuffer                         0x2000228c   Data          12  shell.o(.bss)
+    ringbuffer                               0x20002298   Data         200  shell.o(.bss)
+    gs_shell_thread                          0x20002360   Data         132  shell.o(.bss)
+    gs_shell_thread_stack                    0x200023e4   Data        1000  shell.o(.bss)
+    cmd_buffer                               0x200027cc   Data          50  shell.o(.bss)
+    my_shell                                 0x20002800   Data         188  shell.o(.bss)
+    thread_array                             0x200028bc   Data         400  cmd.o(.bss)
+    __initial_sp                             0x20002e50   Data           0  startup_stm32f40xx.o(STACK)
 
 
 
@@ -2189,28 +2200,28 @@ Memory Map of the image
 
   Image Entry point : 0x08000189
 
-  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00001c9c, Max: 0x00100000, ABSOLUTE)
+  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00001e2c, Max: 0x00100000, ABSOLUTE)
 
-    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00001be8, Max: 0x00100000, ABSOLUTE)
+    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00001d74, Max: 0x00100000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x08000000   0x08000000   0x00000188   Data   RO            3    RESET               startup_stm32f40xx.o
-    0x08000188   0x08000188   0x00000000   Code   RO         5817  * .ARM.Collect$$$$00000000  mc_w.l(entry.o)
-    0x08000188   0x08000188   0x00000004   Code   RO         6083    .ARM.Collect$$$$00000001  mc_w.l(entry2.o)
-    0x0800018c   0x0800018c   0x00000004   Code   RO         6086    .ARM.Collect$$$$00000004  mc_w.l(entry5.o)
-    0x08000190   0x08000190   0x00000000   Code   RO         6088    .ARM.Collect$$$$00000008  mc_w.l(entry7b.o)
-    0x08000190   0x08000190   0x00000000   Code   RO         6090    .ARM.Collect$$$$0000000A  mc_w.l(entry8b.o)
-    0x08000190   0x08000190   0x00000008   Code   RO         6091    .ARM.Collect$$$$0000000B  mc_w.l(entry9a.o)
-    0x08000198   0x08000198   0x00000000   Code   RO         6093    .ARM.Collect$$$$0000000D  mc_w.l(entry10a.o)
-    0x08000198   0x08000198   0x00000000   Code   RO         6095    .ARM.Collect$$$$0000000F  mc_w.l(entry11a.o)
-    0x08000198   0x08000198   0x00000004   Code   RO         6084    .ARM.Collect$$$$00002712  mc_w.l(entry2.o)
+    0x08000188   0x08000188   0x00000000   Code   RO         5827  * .ARM.Collect$$$$00000000  mc_w.l(entry.o)
+    0x08000188   0x08000188   0x00000004   Code   RO         6093    .ARM.Collect$$$$00000001  mc_w.l(entry2.o)
+    0x0800018c   0x0800018c   0x00000004   Code   RO         6096    .ARM.Collect$$$$00000004  mc_w.l(entry5.o)
+    0x08000190   0x08000190   0x00000000   Code   RO         6098    .ARM.Collect$$$$00000008  mc_w.l(entry7b.o)
+    0x08000190   0x08000190   0x00000000   Code   RO         6100    .ARM.Collect$$$$0000000A  mc_w.l(entry8b.o)
+    0x08000190   0x08000190   0x00000008   Code   RO         6101    .ARM.Collect$$$$0000000B  mc_w.l(entry9a.o)
+    0x08000198   0x08000198   0x00000000   Code   RO         6103    .ARM.Collect$$$$0000000D  mc_w.l(entry10a.o)
+    0x08000198   0x08000198   0x00000000   Code   RO         6105    .ARM.Collect$$$$0000000F  mc_w.l(entry11a.o)
+    0x08000198   0x08000198   0x00000004   Code   RO         6094    .ARM.Collect$$$$00002712  mc_w.l(entry2.o)
     0x0800019c   0x0800019c   0x00000024   Code   RO            4    .text               startup_stm32f40xx.o
     0x080001c0   0x080001c0   0x000000b0   Code   RO         5002    .text               context_rvds.o
-    0x08000270   0x08000270   0x00000012   Code   RO         5820    .text               mc_w.l(strcpy.o)
-    0x08000282   0x08000282   0x0000002c   Code   RO         6098    .text               mc_w.l(uidiv.o)
+    0x08000270   0x08000270   0x00000012   Code   RO         5830    .text               mc_w.l(strcpy.o)
+    0x08000282   0x08000282   0x0000002c   Code   RO         6108    .text               mc_w.l(uidiv.o)
     0x080002ae   0x080002ae   0x00000002   PAD
-    0x080002b0   0x080002b0   0x00000024   Code   RO         6113    .text               mc_w.l(init.o)
+    0x080002b0   0x080002b0   0x00000024   Code   RO         6123    .text               mc_w.l(init.o)
     0x080002d4   0x080002d4   0x00000002   Code   RO         4873    i.BusFault_Handler  stm32f4xx_it.o
     0x080002d6   0x080002d6   0x00000002   Code   RO         4874    i.DebugMon_Handler  stm32f4xx_it.o
     0x080002d8   0x080002d8   0x000000a8   Code   RO         4936    i.Debug_USART_Config  bsp_debug_usart.o
@@ -2218,8 +2229,8 @@ Memory Map of the image
     0x080003fc   0x080003fc   0x00000020   Code   RO         1858    i.GPIO_PinAFConfig  stm32f4xx_gpio.o
     0x0800041c   0x0800041c   0x00000002   Code   RO         4875    i.HardFault_Handler  stm32f4xx_it.o
     0x0800041e   0x0800041e   0x00000002   PAD
-    0x08000420   0x08000420   0x00000038   Code   RO         5785    i.Key_GPIO_Config   bsp_key.o
-    0x08000458   0x08000458   0x00000058   Code   RO         5760    i.LED_GPIO_Config   bsp_led.o
+    0x08000420   0x08000420   0x00000038   Code   RO         5795    i.Key_GPIO_Config   bsp_key.o
+    0x08000458   0x08000458   0x00000058   Code   RO         5770    i.LED_GPIO_Config   bsp_led.o
     0x080004b0   0x080004b0   0x00000002   Code   RO         4876    i.MemManage_Handler  stm32f4xx_it.o
     0x080004b2   0x080004b2   0x00000002   Code   RO         4877    i.NMI_Handler       stm32f4xx_it.o
     0x080004b4   0x080004b4   0x00000026   Code   RO         4937    i.NVIC_Configuration  bsp_debug_usart.o
@@ -2245,113 +2256,116 @@ Memory Map of the image
     0x080008f8   0x080008f8   0x00000008   Code   RO         4528    i.USART_SendData    stm32f4xx_usart.o
     0x08000900   0x08000900   0x00000002   Code   RO         4879    i.UsageFault_Handler  stm32f4xx_it.o
     0x08000902   0x08000902   0x00000002   PAD
-    0x08000904   0x08000904   0x00000020   Code   RO         5977    i.__0printf$6       mc_w.l(printf6.o)
+    0x08000904   0x08000904   0x00000020   Code   RO         5987    i.__0printf$6       mc_w.l(printf6.o)
     0x08000924   0x08000924   0x00000018   Code   RO         5142    i.__gs_ffs          kservice.o
-    0x0800093c   0x0800093c   0x0000000e   Code   RO         6125    i.__scatterload_copy  mc_w.l(handlers.o)
-    0x0800094a   0x0800094a   0x00000002   Code   RO         6126    i.__scatterload_null  mc_w.l(handlers.o)
-    0x0800094c   0x0800094c   0x0000000e   Code   RO         6127    i.__scatterload_zeroinit  mc_w.l(handlers.o)
+    0x0800093c   0x0800093c   0x0000000e   Code   RO         6135    i.__scatterload_copy  mc_w.l(handlers.o)
+    0x0800094a   0x0800094a   0x00000002   Code   RO         6136    i.__scatterload_null  mc_w.l(handlers.o)
+    0x0800094c   0x0800094c   0x0000000e   Code   RO         6137    i.__scatterload_zeroinit  mc_w.l(handlers.o)
     0x0800095a   0x0800095a   0x00000028   Code   RO         5390    i._gs_timer_init    timer.o
     0x08000982   0x08000982   0x00000022   Code   RO         5391    i._gs_timer_remove  timer.o
-    0x080009a4   0x080009a4   0x000002f0   Code   RO         5984    i._printf_core      mc_w.l(printf6.o)
-    0x08000c94   0x08000c94   0x00000024   Code   RO         5985    i._printf_post_padding  mc_w.l(printf6.o)
-    0x08000cb8   0x08000cb8   0x0000002e   Code   RO         5986    i._printf_pre_padding  mc_w.l(printf6.o)
+    0x080009a4   0x080009a4   0x000002f0   Code   RO         5994    i._printf_core      mc_w.l(printf6.o)
+    0x08000c94   0x08000c94   0x00000024   Code   RO         5995    i._printf_post_padding  mc_w.l(printf6.o)
+    0x08000cb8   0x08000cb8   0x0000002e   Code   RO         5996    i._printf_pre_padding  mc_w.l(printf6.o)
     0x08000ce6   0x08000ce6   0x00000002   PAD
-    0x08000ce8   0x08000ce8   0x000000ac   Code   RO         5666    i.cmd_clear         cmd.o
-    0x08000d94   0x08000d94   0x000000dc   Code   RO         5667    i.cmd_help          cmd.o
-    0x08000e70   0x08000e70   0x0000003c   Code   RO         5595    i.cmd_list_add      shell.o
-    0x08000eac   0x08000eac   0x000000e4   Code   RO         5668    i.cmd_ps            cmd.o
-    0x08000f90   0x08000f90   0x00000002   Code   RO         5669    i.cmd_reboot        cmd.o
-    0x08000f92   0x08000f92   0x00000004   Code   RO         5670    i.cmd_version       cmd.o
-    0x08000f96   0x08000f96   0x00000002   PAD
-    0x08000f98   0x08000f98   0x0000001c   Code   RO         4767    i.flag1_thread_entry  main.o
-    0x08000fb4   0x08000fb4   0x0000001c   Code   RO         4768    i.flag2_thread_entry  main.o
-    0x08000fd0   0x08000fd0   0x0000001c   Code   RO         4769    i.flag3_thread_entry  main.o
-    0x08000fec   0x08000fec   0x0000000c   Code   RO         4770    i.flag4_thread_entry  main.o
-    0x08000ff8   0x08000ff8   0x0000000c   Code   RO         4771    i.flag5_thread_entry  main.o
-    0x08001004   0x08001004   0x0000000c   Code   RO         4772    i.flag6_thread_entry  main.o
-    0x08001010   0x08001010   0x00000024   Code   RO         4943    i.fputc             bsp_debug_usart.o
-    0x08001034   0x08001034   0x0000003c   Code   RO         5009    i.gs_hw_stack_init  cpuport.o
-    0x08001070   0x08001070   0x0000001c   Code   RO         5109    i.gs_interrupt_enter  irq.o
-    0x0800108c   0x0800108c   0x0000001c   Code   RO         5110    i.gs_interrupt_leave  irq.o
-    0x080010a8   0x080010a8   0x0000000e   Code   RO         5392    i.gs_list_insert_after  timer.o
-    0x080010b6   0x080010b6   0x00000012   Code   RO         5291    i.gs_list_remove    thread.o
-    0x080010c8   0x080010c8   0x00000048   Code   RO         5500    i.gs_mutex_create   ipc.o
-    0x08001110   0x08001110   0x00000024   Code   RO         5199    i.gs_object_get_infomation  object.o
-    0x08001134   0x08001134   0x0000003e   Code   RO         5200    i.gs_object_init    object.o
-    0x08001172   0x08001172   0x00000032   Code   RO         5718    i.gs_ringbuffer_getchar  ringbuffer.o
-    0x080011a4   0x080011a4   0x00000020   Code   RO         5719    i.gs_ringbuffer_init  ringbuffer.o
-    0x080011c4   0x080011c4   0x00000014   Code   RO         5720    i.gs_ringbuffer_isempty  ringbuffer.o
-    0x080011d8   0x080011d8   0x00000030   Code   RO         5721    i.gs_ringbuffer_putchar  ringbuffer.o
-    0x08001208   0x08001208   0x0000004c   Code   RO         5234    i.gs_schedule       scheduler.o
-    0x08001254   0x08001254   0x00000044   Code   RO         5235    i.gs_schedule_insert_thread  scheduler.o
-    0x08001298   0x08001298   0x00000054   Code   RO         5236    i.gs_schedule_remove_thread  scheduler.o
-    0x080012ec   0x080012ec   0x00000040   Code   RO         5504    i.gs_sem_create     ipc.o
-    0x0800132c   0x0800132c   0x00000070   Code   RO         5596    i.gs_shell_init     shell.o
-    0x0800139c   0x0800139c   0x00000026   Code   RO         5146    i.gs_strncpy        kservice.o
-    0x080013c2   0x080013c2   0x00000002   PAD
-    0x080013c4   0x080013c4   0x00000028   Code   RO         5237    i.gs_system_scheduler_init  scheduler.o
-    0x080013ec   0x080013ec   0x00000028   Code   RO         5238    i.gs_system_scheduler_start  scheduler.o
-    0x08001414   0x08001414   0x00000018   Code   RO         5393    i.gs_system_timer_init  timer.o
-    0x0800142c   0x0800142c   0x0000005c   Code   RO         5464    i.gs_thread_all_init  components.o
-    0x08001488   0x08001488   0x00000004   Code   RO         5293    i.gs_thread_delay   thread.o
-    0x0800148c   0x0800148c   0x00000004   Code   RO         5294    i.gs_thread_delay_ms  thread.o
-    0x08001490   0x08001490   0x00000010   Code   RO         5074    i.gs_thread_idle_entry  idle.o
-    0x080014a0   0x080014a0   0x00000040   Code   RO         5075    i.gs_thread_idle_init  idle.o
-    0x080014e0   0x080014e0   0x0000008c   Code   RO         5296    i.gs_thread_init    thread.o
-    0x0800156c   0x0800156c   0x00000034   Code   RO         5297    i.gs_thread_resume  thread.o
-    0x080015a0   0x080015a0   0x0000000c   Code   RO         5298    i.gs_thread_self    thread.o
-    0x080015ac   0x080015ac   0x0000003c   Code   RO         5597    i.gs_thread_shell_entry  shell.o
-    0x080015e8   0x080015e8   0x00000038   Code   RO         5299    i.gs_thread_sleep   thread.o
-    0x08001620   0x08001620   0x00000026   Code   RO         5300    i.gs_thread_startup  thread.o
-    0x08001646   0x08001646   0x0000003a   Code   RO         5301    i.gs_thread_suspend  thread.o
-    0x08001680   0x08001680   0x00000020   Code   RO         5302    i.gs_thread_timeout  thread.o
-    0x080016a0   0x080016a0   0x00000060   Code   RO         5303    i.gs_thread_yield   thread.o
-    0x08001700   0x08001700   0x0000000c   Code   RO         5038    i.gs_tick_get       clock.o
-    0x0800170c   0x0800170c   0x0000002c   Code   RO         5039    i.gs_tick_increase  clock.o
-    0x08001738   0x08001738   0x00000070   Code   RO         5394    i.gs_timer_check    timer.o
-    0x080017a8   0x080017a8   0x00000034   Code   RO         5395    i.gs_timer_control  timer.o
-    0x080017dc   0x080017dc   0x0000002a   Code   RO         5396    i.gs_timer_init     timer.o
-    0x08001806   0x08001806   0x00000002   PAD
-    0x08001808   0x08001808   0x000000d4   Code   RO         5397    i.gs_timer_start    timer.o
-    0x080018dc   0x080018dc   0x0000002e   Code   RO         5398    i.gs_timer_stop     timer.o
-    0x0800190a   0x0800190a   0x00000002   PAD
-    0x0800190c   0x0800190c   0x00000170   Code   RO         4773    i.main              main.o
-    0x08001a7c   0x08001a7c   0x00000024   Code   RO         5598    i.shell_getchar     shell.o
-    0x08001aa0   0x08001aa0   0x000000ac   Code   RO         5147    i.show_version      kservice.o
-    0x08001b4c   0x08001b4c   0x0000007c   Code   RO         5600    i.system_cmd_init   shell.o
-    0x08001bc8   0x08001bc8   0x00000020   Data   RO         6123    Region$$Table       anon$$obj.o
+    0x08000ce8   0x08000ce8   0x000000bc   Code   RO         5672    i.cmd_clear         cmd.o
+    0x08000da4   0x08000da4   0x000000dc   Code   RO         5673    i.cmd_help          cmd.o
+    0x08000e80   0x08000e80   0x0000003c   Code   RO         5595    i.cmd_list_add      shell.o
+    0x08000ebc   0x08000ebc   0x000000f0   Code   RO         5674    i.cmd_ps            cmd.o
+    0x08000fac   0x08000fac   0x00000024   Code   RO         5675    i.cmd_reboot        cmd.o
+    0x08000fd0   0x08000fd0   0x00000004   Code   RO         5676    i.cmd_version       cmd.o
+    0x08000fd4   0x08000fd4   0x0000001c   Code   RO         4767    i.flag1_thread_entry  main.o
+    0x08000ff0   0x08000ff0   0x0000001c   Code   RO         4768    i.flag2_thread_entry  main.o
+    0x0800100c   0x0800100c   0x0000001c   Code   RO         4769    i.flag3_thread_entry  main.o
+    0x08001028   0x08001028   0x0000000c   Code   RO         4770    i.flag4_thread_entry  main.o
+    0x08001034   0x08001034   0x0000000c   Code   RO         4771    i.flag5_thread_entry  main.o
+    0x08001040   0x08001040   0x0000000c   Code   RO         4772    i.flag6_thread_entry  main.o
+    0x0800104c   0x0800104c   0x00000024   Code   RO         4943    i.fputc             bsp_debug_usart.o
+    0x08001070   0x08001070   0x0000003c   Code   RO         5009    i.gs_hw_stack_init  cpuport.o
+    0x080010ac   0x080010ac   0x0000001c   Code   RO         5109    i.gs_interrupt_enter  irq.o
+    0x080010c8   0x080010c8   0x0000001c   Code   RO         5110    i.gs_interrupt_leave  irq.o
+    0x080010e4   0x080010e4   0x0000000e   Code   RO         5392    i.gs_list_insert_after  timer.o
+    0x080010f2   0x080010f2   0x00000012   Code   RO         5291    i.gs_list_remove    thread.o
+    0x08001104   0x08001104   0x00000044   Code   RO         5500    i.gs_mutex_create   ipc.o
+    0x08001148   0x08001148   0x00000024   Code   RO         5199    i.gs_object_get_infomation  object.o
+    0x0800116c   0x0800116c   0x0000003e   Code   RO         5200    i.gs_object_init    object.o
+    0x080011aa   0x080011aa   0x00000032   Code   RO         5728    i.gs_ringbuffer_getchar  ringbuffer.o
+    0x080011dc   0x080011dc   0x00000020   Code   RO         5729    i.gs_ringbuffer_init  ringbuffer.o
+    0x080011fc   0x080011fc   0x00000014   Code   RO         5730    i.gs_ringbuffer_isempty  ringbuffer.o
+    0x08001210   0x08001210   0x00000030   Code   RO         5731    i.gs_ringbuffer_putchar  ringbuffer.o
+    0x08001240   0x08001240   0x0000004c   Code   RO         5234    i.gs_schedule       scheduler.o
+    0x0800128c   0x0800128c   0x00000044   Code   RO         5235    i.gs_schedule_insert_thread  scheduler.o
+    0x080012d0   0x080012d0   0x00000054   Code   RO         5236    i.gs_schedule_remove_thread  scheduler.o
+    0x08001324   0x08001324   0x00000040   Code   RO         5504    i.gs_sem_create     ipc.o
+    0x08001364   0x08001364   0x00000070   Code   RO         5596    i.gs_shell_init     shell.o
+    0x080013d4   0x080013d4   0x00000034   Code   RO         5144    i.gs_strcmp         kservice.o
+    0x08001408   0x08001408   0x00000026   Code   RO         5146    i.gs_strncpy        kservice.o
+    0x0800142e   0x0800142e   0x00000002   PAD
+    0x08001430   0x08001430   0x00000028   Code   RO         5237    i.gs_system_scheduler_init  scheduler.o
+    0x08001458   0x08001458   0x00000028   Code   RO         5238    i.gs_system_scheduler_start  scheduler.o
+    0x08001480   0x08001480   0x00000018   Code   RO         5393    i.gs_system_timer_init  timer.o
+    0x08001498   0x08001498   0x0000005c   Code   RO         5464    i.gs_thread_all_init  components.o
+    0x080014f4   0x080014f4   0x00000004   Code   RO         5293    i.gs_thread_delay   thread.o
+    0x080014f8   0x080014f8   0x00000004   Code   RO         5294    i.gs_thread_delay_ms  thread.o
+    0x080014fc   0x080014fc   0x00000010   Code   RO         5074    i.gs_thread_idle_entry  idle.o
+    0x0800150c   0x0800150c   0x00000040   Code   RO         5075    i.gs_thread_idle_init  idle.o
+    0x0800154c   0x0800154c   0x0000008c   Code   RO         5296    i.gs_thread_init    thread.o
+    0x080015d8   0x080015d8   0x00000034   Code   RO         5297    i.gs_thread_resume  thread.o
+    0x0800160c   0x0800160c   0x0000000c   Code   RO         5298    i.gs_thread_self    thread.o
+    0x08001618   0x08001618   0x00000024   Code   RO         5597    i.gs_thread_shell_entry  shell.o
+    0x0800163c   0x0800163c   0x00000038   Code   RO         5299    i.gs_thread_sleep   thread.o
+    0x08001674   0x08001674   0x00000026   Code   RO         5300    i.gs_thread_startup  thread.o
+    0x0800169a   0x0800169a   0x0000003a   Code   RO         5301    i.gs_thread_suspend  thread.o
+    0x080016d4   0x080016d4   0x00000020   Code   RO         5302    i.gs_thread_timeout  thread.o
+    0x080016f4   0x080016f4   0x00000060   Code   RO         5303    i.gs_thread_yield   thread.o
+    0x08001754   0x08001754   0x0000000c   Code   RO         5038    i.gs_tick_get       clock.o
+    0x08001760   0x08001760   0x0000002c   Code   RO         5039    i.gs_tick_increase  clock.o
+    0x0800178c   0x0800178c   0x00000070   Code   RO         5394    i.gs_timer_check    timer.o
+    0x080017fc   0x080017fc   0x00000034   Code   RO         5395    i.gs_timer_control  timer.o
+    0x08001830   0x08001830   0x0000002a   Code   RO         5396    i.gs_timer_init     timer.o
+    0x0800185a   0x0800185a   0x00000002   PAD
+    0x0800185c   0x0800185c   0x000000d4   Code   RO         5397    i.gs_timer_start    timer.o
+    0x08001930   0x08001930   0x0000002e   Code   RO         5398    i.gs_timer_stop     timer.o
+    0x0800195e   0x0800195e   0x00000002   PAD
+    0x08001960   0x08001960   0x00000170   Code   RO         4773    i.main              main.o
+    0x08001ad0   0x08001ad0   0x00000060   Code   RO         5598    i.receive_char      shell.o
+    0x08001b30   0x08001b30   0x00000028   Code   RO         5599    i.shell_getchar     shell.o
+    0x08001b58   0x08001b58   0x000000cc   Code   RO         5600    i.shell_match       shell.o
+    0x08001c24   0x08001c24   0x000000b4   Code   RO         5147    i.show_version      kservice.o
+    0x08001cd8   0x08001cd8   0x0000007c   Code   RO         5601    i.system_cmd_init   shell.o
+    0x08001d54   0x08001d54   0x00000020   Data   RO         6133    Region$$Table       anon$$obj.o
 
 
-    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08001be8, Size: 0x00002c08, Max: 0x00020000, ABSOLUTE)
+    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08001d74, Size: 0x00002e50, Max: 0x00020000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000000   0x08001be8   0x00000014   Data   RW           16    .data               system_stm32f4xx.o
-    0x20000014   0x08001bfc   0x00000010   Data   RW         2614    .data               stm32f4xx_rcc.o
-    0x20000024   0x08001c0c   0x00000008   Data   RW         4775    .data               main.o
-    0x2000002c   0x08001c14   0x00000004   Data   RW         5010    .data               cpuport.o
-    0x20000030   0x08001c18   0x00000004   Data   RW         5011    .data               cpuport.o
-    0x20000034   0x08001c1c   0x00000004   Data   RW         5012    .data               cpuport.o
-    0x20000038   0x08001c20   0x00000004   Data   RW         5040    .data               clock.o
-    0x2000003c   0x08001c24   0x00000004   Data   RW         5077    .data               idle.o
-    0x20000040   0x08001c28   0x00000001   Data   RW         5111    .data               irq.o
-    0x20000041   0x08001c29   0x00000003   PAD
-    0x20000044   0x08001c2c   0x00000040   Data   RW         5201    .data               object.o
-    0x20000084   0x08001c6c   0x0000000c   Data   RW         5240    .data               scheduler.o
-    0x20000090   0x08001c78   0x0000000c   Data   RW         5399    .data               timer.o
-    0x2000009c   0x08001c84   0x00000008   Data   RW         5509    .data               ipc.o
-    0x200000a4   0x08001c8c   0x00000008   Data   RW         5603    .data               shell.o
-    0x200000ac   0x08001c94   0x00000004   Data   RW         5672    .data               cmd.o
-    0x200000b0   0x08001c98   0x00000004   Data   RW         6097    .data               mc_w.l(stdout.o)
-    0x200000b4        -       0x000005b8   Zero   RW         4774    .bss                main.o
-    0x2000066c        -       0x00000274   Zero   RW         5076    .bss                idle.o
-    0x200008e0        -       0x00000100   Zero   RW         5239    .bss                scheduler.o
-    0x200009e0        -       0x00000a28   Zero   RW         5508    .bss                ipc.o
-    0x20001408        -       0x000011b0   Zero   RW         5601    .bss                shell.o
-    0x200025b8        -       0x000000bc   Zero   RW         5602    .bss                shell.o
-    0x20002674        -       0x00000190   Zero   RW         5671    .bss                cmd.o
-    0x20002804   0x08001c9c   0x00000004   PAD
-    0x20002808        -       0x00000400   Zero   RW            1    STACK               startup_stm32f40xx.o
+    0x20000000   0x08001d74   0x00000014   Data   RW           16    .data               system_stm32f4xx.o
+    0x20000014   0x08001d88   0x00000010   Data   RW         2614    .data               stm32f4xx_rcc.o
+    0x20000024   0x08001d98   0x00000008   Data   RW         4775    .data               main.o
+    0x2000002c   0x08001da0   0x00000004   Data   RW         5010    .data               cpuport.o
+    0x20000030   0x08001da4   0x00000004   Data   RW         5011    .data               cpuport.o
+    0x20000034   0x08001da8   0x00000004   Data   RW         5012    .data               cpuport.o
+    0x20000038   0x08001dac   0x00000004   Data   RW         5040    .data               clock.o
+    0x2000003c   0x08001db0   0x00000004   Data   RW         5077    .data               idle.o
+    0x20000040   0x08001db4   0x00000001   Data   RW         5111    .data               irq.o
+    0x20000041   0x08001db5   0x00000003   PAD
+    0x20000044   0x08001db8   0x00000040   Data   RW         5201    .data               object.o
+    0x20000084   0x08001df8   0x0000000c   Data   RW         5240    .data               scheduler.o
+    0x20000090   0x08001e04   0x0000000c   Data   RW         5399    .data               timer.o
+    0x2000009c   0x08001e10   0x00000008   Data   RW         5509    .data               ipc.o
+    0x200000a4   0x08001e18   0x0000000c   Data   RW         5604    .data               shell.o
+    0x200000b0   0x08001e24   0x00000004   Data   RW         5678    .data               cmd.o
+    0x200000b4   0x08001e28   0x00000004   Data   RW         6107    .data               mc_w.l(stdout.o)
+    0x200000b8        -       0x00000618   Zero   RW         4774    .bss                main.o
+    0x200006d0        -       0x00000284   Zero   RW         5076    .bss                idle.o
+    0x20000954        -       0x00000100   Zero   RW         5239    .bss                scheduler.o
+    0x20000a54        -       0x00000bb8   Zero   RW         5508    .bss                ipc.o
+    0x2000160c        -       0x000011f2   Zero   RW         5602    .bss                shell.o
+    0x200027fe   0x08001e2c   0x00000002   PAD
+    0x20002800        -       0x000000bc   Zero   RW         5603    .bss                shell.o
+    0x200028bc        -       0x00000190   Zero   RW         5677    .bss                cmd.o
+    0x20002a4c   0x08001e2c   0x00000004   PAD
+    0x20002a50        -       0x00000400   Zero   RW            1    STACK               startup_stm32f40xx.o
 
 
 ==============================================================================
@@ -2365,20 +2379,20 @@ Image component sizes
         56          8          0          0          0        578   bsp_key.o
         88          4          0          0          0        618   bsp_led.o
         56         12          0          4          0       1325   clock.o
-       626        352          0          4        400       3721   cmd.o
+       688        372          0          4        400      30004   cmd.o
         92         10          0          0          0      26960   components.o
        176         22          0          0          0        728   context_rvds.o
         60          4          0         12          0       1969   cpuport.o
-        80         28          0          4        628       1899   idle.o
-       136         18          0          8       2600       2867   ipc.o
+        80         28          0          4        644       1899   idle.o
+       132         18          0          8       3000       2867   ipc.o
         56         12          0          1          0       1706   irq.o
-       234        130          0          0          0       1987   kservice.o
-       506        148          0          8       1464      10923   main.o
+       294        132          0          0          0       2779   kservice.o
+       506        150          0          8       1560      10923   main.o
        124         16          0          0          0       1891   misc.o
         98          6          0         64          0       3008   object.o
        150          0          0          0          0       3005   ringbuffer.o
        308         46          0         12        256       5317   scheduler.o
-       392        136          0          8       4716       5618   shell.o
+       672        252          0         12       4782       7140   shell.o
         36          8        392          0       1024        992   startup_stm32f40xx.o
        156          0          0          0          0       2079   stm32f4xx_gpio.o
         14          0          0          0          0       3463   stm32f4xx_it.o
@@ -2389,9 +2403,9 @@ Image component sizes
        576         16          0         12          0       7864   timer.o
 
     ----------------------------------------------------------------------
-      5702       1102        424        176      11092     384555   Object Totals
+      6098       1242        424        180      11672     413152   Object Totals
          0          0         32          0          0          0   (incl. Generated)
-        18          0          0          3          4          0   (incl. Padding)
+        16          0          0          3          6          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
@@ -2432,15 +2446,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      6720       1132        424        180      11092     376519   Grand Totals
-      6720       1132        424        180      11092     376519   ELF Image Totals
-      6720       1132        424        180          0          0   ROM Totals
+      7116       1272        424        184      11672     404816   Grand Totals
+      7116       1272        424        184      11672     404816   ELF Image Totals
+      7116       1272        424        184          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                 7144 (   6.98kB)
-    Total RW  Size (RW Data + ZI Data)             11272 (  11.01kB)
-    Total ROM Size (Code + RO Data + RW Data)       7324 (   7.15kB)
+    Total RO  Size (Code + RO Data)                 7540 (   7.36kB)
+    Total RW  Size (RW Data + ZI Data)             11856 (  11.58kB)
+    Total ROM Size (Code + RO Data + RW Data)       7724 (   7.54kB)
 
 ==============================================================================
 

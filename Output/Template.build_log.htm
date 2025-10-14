@@ -27,24 +27,16 @@ Project File Date:  10/10/2025
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 5 (build 528)', folder: 'D:\keil5\ARM\ARMCC\Bin'
 Build target 'USART'
-compiling shell.c...
+compiling kservice.c...
 ..\..\gsthread\include\gsthread.h(110): warning:  #1295-D: Deprecated declaration gs_shell_init - give arg types
   void gs_shell_init();                                       
-..\..\gsthread\components\shell.h(41): warning:  #1295-D: Deprecated declaration system_cmd_init - give arg types
-  void system_cmd_init();
-..\..\gsthread\components\shell.h(42): warning:  #1295-D: Deprecated declaration gs_shell_init - give arg types
-  void gs_shell_init();
-..\..\gsthread\components\shell.h(44): warning:  #1-D: last line of file ends without a newline
-  #endif
-..\..\gsthread\components\cmd.h(10): warning:  #1-D: last line of file ends without a newline
-  #endif
-..\..\gsthread\components\ringbuffer.h(33): warning:  #1-D: last line of file ends without a newline
-  #endif
-..\..\gsthread\components\shell.c: 6 warnings, 0 errors
+..\..\gsthread\src\kservice.c(111): warning:  #223-D: function "printf" declared implicitly
+  		printf("\r\n");
+..\..\gsthread\src\kservice.c: 2 warnings, 0 errors
 linking...
-Program Size: Code=6720 RO-data=424 RW-data=180 ZI-data=11092  
+Program Size: Code=7116 RO-data=424 RW-data=184 ZI-data=11672  
 FromELF: creating hex file...
-"..\..\Output\Template.axf" - 0 Error(s), 6 Warning(s).
+"..\..\Output\Template.axf" - 0 Error(s), 2 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -58,7 +50,7 @@ Package Vendor: Keil
   D:\keil5\ARM\PACK\Keil\STM32F4xx_DFP\2.15.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include
 
 <h2>Collection of Component Files used:</h2>
-Build Time Elapsed:  00:00:01
+Build Time Elapsed:  00:00:04
 </pre>
 </body>
 </html>
