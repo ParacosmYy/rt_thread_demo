@@ -24,8 +24,8 @@
 #define GS_SHELL_STACK_SIZE     1000
 #define GS_SHELL_PRIORITY       10 
 
-#define GS_SHELL_LENGSH  50
-#define GS_SHELL_HISORY_MAX 30
+#define GS_SHELL_LENGSH  50//命令行最大长度
+#define GS_SHELL_HISORY_MAX 30//历史命令最大条数
 
 #endif /* __RTTHREAD_CFG_H__ */
 

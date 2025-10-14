@@ -11,6 +11,8 @@
         "list.h": "c",
         "bsp_key.h": "c",
         "cmd.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "string.h": "c",
+        "shell.h": "c"
     }
 }

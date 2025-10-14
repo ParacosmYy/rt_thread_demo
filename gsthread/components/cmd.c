@@ -61,5 +61,5 @@ void cmd_help(void * parameter)
 
 void cmd_reboot(void * parameter)
 {
-    ;
+   NVIC_SystemReset(); 
 }

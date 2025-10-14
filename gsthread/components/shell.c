@@ -17,6 +17,35 @@ gs_uint8_t gs_shell_thread_stack[GS_SHELL_STACK_SIZE];
 struct gs_shell my_shell;
 struct gs_shell *shell = &my_shell; 
 
+char cmd_buffer[GS_SHELL_LENGSH];
+int cmd_index = 0;
+
+void receive_char(char ch)
+{
+    ch = shell_getchar();
+    if(ch==0XFF)
+	{
+		continue; // 0XFF表示串口接收没有任何消息中断，跳过
+	}
+    if(ch == '\r' || ch == '\n')
+    {
+        if(cmd_index > 0)
+        {
+            cmd_buffer[cmd_index - 1] = '\0';
+            cmd_index = 0;
+            shell_match(cmd_buffer , cmd_index - 1);
+        }
+        else
+        {
+            cmd_buffer[cmd_index++] = ch;
+            if(cmd_index >= GS_SHELL_LENGSH)
+            {
+                cmd_index = 0;//防止溢出
+            }
+        }
+    }
+}
+
 char shell_getchar()
 {
     char ch ;
@@ -40,15 +69,8 @@ void gs_thread_shell_entry(void * parameter)
     printf("gs />");
     while(1)
     {
-         //printf("gs />");
-         ch = shell_getchar();
-         if(ch==0XFF)
-		{
-		    continue;
-		}
-       
-    }
-   
+        
+    } 
 }
 
 void shell_match(char * cmd , gs_size_t length)
@@ -61,7 +83,7 @@ void shell_match(char * cmd , gs_size_t length)
             if(gs_strcmp(cmd , cmd_table[i].name))
             {
                 cmd_table[i].entry(cmd_table[i].parameter);
-                printf("gs />");
+                printf("gs /> cmd:%s over",cmd_table[i].name);
                 return ;
             }
         }

@@ -8,6 +8,7 @@ enum input_stat
     WAIT_NORMAL_KEY,   // 等待普通按键
     WAIT_DIR_KEY,      // 等待方向键
     WAIT_FUNC_KEY,     // 等待功能键
+	INPUT_END          // 输入结束
 };
 
 struct cmd_node
