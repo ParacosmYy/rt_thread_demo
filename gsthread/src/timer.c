@@ -11,7 +11,7 @@ void gs_system_timer_init(void)
 
     for (i = 0; i < sizeof(gs_timer_list) / sizeof(gs_timer_list[0]); i++)
     {
-        gs_list_init(gs_timer_list + i);
+        gs_list_init(gs_timer_list + i);// 全局链表头初始化，eg：0层可以挂载a，b，c定时器，1层可以挂载d，e，f定时器，以此类推
     }
 }
 
@@ -20,7 +20,7 @@ static void _gs_timer_init(gs_timer_t timer,
                            void (*timeout)(void *parameter),
                            void      *parameter,
                            gs_tick_t  time,
-                           gs_uint8_t flag)
+                           gs_uint8_t flag)//初始化定时器
 {
     int i;
 
@@ -30,18 +30,18 @@ static void _gs_timer_init(gs_timer_t timer,
     /* 先设置为非激活态 */
     timer->parent.flag &= ~GS_TIMER_FLAG_ACTIVATED;
 
-    timer->timeout_func = timeout;
+    timer->timeout_func = timeout; // 设置超时函数 （gs_thread_timeout）
     timer->parameter    = parameter;
 
     /* 初始化 定时器实际超时时的系统节拍数 */
-    timer->timeout_tick = 0;
+    timer->timeout_tick = 0;//什么时候超时——绝对时间点
     /* 初始化 定时器需要超时的节拍数 */
-    timer->init_tick    = time;
+    timer->init_tick    = time;  //等多久超时——相对时间间隔
 
     /* 初始化定时器的内置节点 */
     for (i = 0; i < GS_TIMER_SKIP_LIST_LEVEL; i++)
     {
-        gs_list_init(&(timer->row[i]));
+        gs_list_init(&(timer->row[i]));//单个定时器的节点初始化 eg：a定时器节点初始化，b定时器节点初始化，c定时器节点初始化，以此类推
     }
 }
 
@@ -60,13 +60,13 @@ void gs_timer_init(gs_timer_t  timer,
     _gs_timer_init(timer, timeout, parameter, time, flag);
 }
 
-gs_inline void _gs_timer_remove(gs_timer_t timer)
+void _gs_timer_remove(gs_timer_t timer)
 {
     int i;
 
     for (i = 0; i < GS_TIMER_SKIP_LIST_LEVEL; i++)
     {
-        gs_list_remove(&timer->row[i]);
+        gs_list_remove(&timer->row[i]); //将定时器从系统定时器列表删除
     }
 }
 
@@ -74,7 +74,7 @@ gs_err_t gs_timer_stop(gs_timer_t timer)
 {
     register gs_base_t level;
 
-   
+   // If the timer is not active, return error
     if (!(timer->parent.flag & GS_TIMER_FLAG_ACTIVATED))
         return -GS_ERROR;
 

@@ -18,7 +18,8 @@ NVIC_INT_CTRL   EQU     0xE000ED04     ; 中断控制状态寄存器
 NVIC_SYSPRI2    EQU     0xE000ED20     ; 系统优先级寄存器(2)
 NVIC_PENDSV_PRI EQU     0x00FF0000     ; PendSV 优先级值 (lowest)
 NVIC_PENDSVSET  EQU     0x10000000     ; 触发PendSV exception的值
-	
+
+
 ;*************************************************************************
 ;                              代码产生指令
 ;*************************************************************************
@@ -32,8 +33,8 @@ gs_hw_interrupt_disable PROC
     EXPORT gs_hw_interrupt_disable
         
     MRS r0, PRIMASK
-    CPSID I
-    BX lr
+    CPSID I 
+    BX lr ;返回r0
     ENDP
         
 gs_hw_interrupt_enable PROC
@@ -59,7 +60,7 @@ gs_hw_context_switch_first PROC
 
     LDR     r0, =NVIC_SYSPRI2
     LDR     r1, =NVIC_PENDSV_PRI
-    LDR.W   r2, [r0,#0x00]       ; 读
+    LDR.W   r2, [r0,#0x00]       ; 读 //偏移量
     ORR     r1,r1,r2             ; 改
     STR     r1, [r0]             ; 写
 
@@ -67,17 +68,17 @@ gs_hw_context_switch_first PROC
     LDR     r1, =NVIC_PENDSVSET
     STR     r1, [r0]
 
-    CPSIE F
-    CPSIE I
+    CPSIE F  ; faultmask = 1
+    CPSIE I  ; primask = 1
 
     ENDP
      
-gs_hw_context_switch    PROC
+gs_hw_context_switch    PROC  ;r0:from, r1:to
     EXPORT gs_hw_context_switch
     
     LDR r2, =gs_thread_switch_interrupt_flag
     LDR r3,[r2]
-    CMP r3,#1
+    CMP r3,#1 ;是否已经切换过线程 r3=1表示已经切换过线程
     BEQ _reswitch
     MOV r3,#1
     STR r3,[r2]
@@ -127,7 +128,7 @@ switch_to_thread
     LDR     r1, =gs_interrupt_to_thread             
 	                                                 
     LDR     r1, [r1]                                 
-    LDR     r1, [r1]                                 
+    LDR     r1, [r1]     //stack_ptr                             
 
     LDMFD   r1!, {r4 - r11}                          
     MSR     psp, r1                                  

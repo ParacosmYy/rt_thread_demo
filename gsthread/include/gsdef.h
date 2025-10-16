@@ -138,7 +138,7 @@ struct gs_timer
 {
     struct gs_object parent;                         /* 从 rt_object 继承 */
 
-    gs_list_t row[GS_TIMER_SKIP_LIST_LEVEL];
+    gs_list_t row[GS_TIMER_SKIP_LIST_LEVEL];// 定时器跳表节点
 
     void (*timeout_func)(void *parameter);           /* 超时函数 */
     void            *parameter;                      /* 超时函数形参 */
@@ -235,7 +235,7 @@ typedef struct gs_thread *gs_thread_t;
 #define GS_THREAD_RUNNING               0x03                /* 运行态 */
 #define GS_THREAD_BLOCK                 GS_THREAD_SUSPEND   /* 阻塞态 */
 #define GS_THREAD_CLOSE                 0x04                /* 关闭态 */
-#define GS_THREAD_STAT_MASK             0x0f
+#define GS_THREAD_STAT_MASK             0x0f// 线程状态掩码
         
 #define GS_THREAD_STAT_SIGNAL           0x10
 #define GS_THREAD_STAT_SIGNAL_READY     (GS_THREAD_STAT_SIGNAL | GS_THREAD_READY)

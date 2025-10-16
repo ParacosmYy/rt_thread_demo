@@ -10,14 +10,19 @@ gs_size_t mutex_index=0;
 gs_sem_t gs_sem_create(const char* name , gs_uint16_t value , gs_uint8_t flag )
 {
     struct gs_semaphore * sem = &semaphore[sem_index];
-    sem_index ++ ;
+    sem_index ++ ;//记录信号量数量
+
+    if(sem_index >= GS_SEM_NUM_MAX)
+    {
+        return GS_NULL; // 超过最大信号量数量
+    }
     
     gs_list_init(&(sem->suspend_thread)); // 初始化挂载链表
     
     gs_strncpy(sem->name , name , sizeof(sem->name)-1);
     sem->name[sizeof(sem->name) - 1] = '\0';
     
-    sem->value = value;
+    sem->value = value; //信号量初始值
     sem->flag = flag;
     
     return sem;
@@ -48,7 +53,7 @@ gs_err_t gs_ipc_list_resume_all(gs_list_t * list)
         temp = gs_hw_interrupt_disable();
 
       
-        thread = gs_list_entry(list->next, struct gs_thread, tlist);
+        thread = gs_list_entry(list->next, struct gs_thread, tlist);//suspend链表上的第一个挂载线程节点
        
         thread->error = -GS_ERROR; // ipc发生异常 导致线程恢复
 
@@ -67,7 +72,7 @@ gs_err_t gs_sem_delete(gs_sem_t sem)
     return GS_EOK;
 }
 
-gs_inline gs_err_t gs_ipc_list_suspend(gs_list_t        *list,
+gs_err_t gs_ipc_list_suspend(gs_list_t        *list,
                                        struct gs_thread *thread,
                                        gs_uint8_t        flag)
 {
@@ -76,11 +81,11 @@ gs_inline gs_err_t gs_ipc_list_suspend(gs_list_t        *list,
 
     switch (flag)
     {
-    case GS_IPC_FLAG_FIFO:
+    case GS_IPC_FLAG_FIFO://先进先出
         gs_list_insert_before(list, &(thread->tlist));
         break;
 
-    case GS_IPC_FLAG_PRIO:
+    case GS_IPC_FLAG_PRIO://优先级插入
         {
             struct gs_list_node *n; // list_t
             struct gs_thread *sthread;
@@ -88,14 +93,14 @@ gs_inline gs_err_t gs_ipc_list_suspend(gs_list_t        *list,
            
             for (n = list->next; n != list; n = n->next) //遍历链表 （就绪or挂载）
             {
-                sthread = gs_list_entry(n, struct gs_thread, tlist);
+                sthread = gs_list_entry(n, struct gs_thread, tlist);//获取线程控制块的第n个节点的地址
 
                
                 if (thread->current_priority < sthread->current_priority)
                 {
      
                     gs_list_insert_before(&(sthread->tlist), &(thread->tlist));
-                    break;
+                    break; 
                 }
             }
 
@@ -170,7 +175,7 @@ gs_err_t gs_sem_release(gs_sem_t sem)
     temp = gs_hw_interrupt_disable();
 
 
-    if (!gs_list_isempty(&sem->suspend_thread))
+    if (!gs_list_isempty(&sem->suspend_thread)) //suspend链表中含有挂起线程
     {
       
         gs_ipc_list_resume(&(sem->suspend_thread)); //释放当前信号量中的suspend线程

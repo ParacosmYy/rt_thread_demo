@@ -42,7 +42,7 @@ enum gs_object_info_type
 
 
 #define _OBJ_CONTAINER_LIST_INIT(c)     \
-    {&(gs_object_container[c].object_list), &(gs_object_container[c].object_list)}
+    {&(gs_object_container[c].object_list), &(gs_object_container[c].object_list)} //初始化对象容器链表头
 		
 static struct gs_object_information gs_object_container[GS_Object_Info_Unknown] =
 {
@@ -147,7 +147,7 @@ struct gs_object_information * gs_object_get_infomation(enum gs_object_class_typ
     {
         if(gs_object_container[index].type == type )
         {
-            return &gs_object_container[index];
+            return &gs_object_container[index];  //找到了对应的对象信息
         }
     }
     return GS_NULL;
@@ -158,8 +158,8 @@ void gs_object_init(struct gs_object *object , enum gs_object_class_type type , 
     register gs_base_t temp;
     struct gs_object_information * information;
     
-    information = gs_object_get_infomation(type);
-    
+    information = gs_object_get_infomation(type); //获取对象信息
+
     object->type = type | GS_Object_Class_Static;
     
     gs_strncpy(object->name,name,GS_NAME_MAX);

@@ -39,3 +39,6 @@
 - 互斥锁与信号量功能通过测试
 
 ---
+### 问题记录
+1. SCB_VTOR EQU 0xE000ED08  == #define SCB_VTOR 0xE000ED08
+2. PRIMASK(特殊功能寄存器) 为0则屏蔽中断，为1则开启中断（只有NMI和HardFault会响应）
